@@ -19,7 +19,7 @@ class BDD(DD):
 	"""
 	Reduced Ordered Binary Decision Diagram class.
 
-	:param index: root vertex variable index
+	:param index: root vertex variable index (-1 if terminal vertex)
 	:type  index: int
 	:param low:   low child vertex of BDD (None if terminal vertex)
 	:type  low:   pydd.BDD
