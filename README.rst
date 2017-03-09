@@ -19,6 +19,16 @@ Enrico Macii, Abelardo Pardo, and Fabio Somenzi. **Algebraic decision
 diagrams and their applications**. Formal methods in system design 10,
 no. 2-3 (1997): 171-206.
 
+Install
+-------
+
+It is required to have Python3 installed.
+
+::
+
+    $ pip3 install pydd
+
+
 Usage
 -----
 
@@ -61,7 +71,7 @@ functions with logical operations AND (&), OR (\|), XOR (^) and NOT (-).
     if (bdd1 & one) == bdd1:
         print('True is the neutral element for AND operation!')
 
-    bdd2 = --x2 ^ (-(x1 | x3))
+    bdd2 = -(-x2) ^ (-(x1 | x3))
     if (bdd2 | zero) == bdd2:
         print('False is the neutral element for OR operation!')
 
