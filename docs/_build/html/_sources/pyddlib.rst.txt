@@ -1,21 +1,21 @@
-pydd package
-============
+pyddlib package
+===============
 
 Submodules
 ----------
 
-pydd.bdd module
----------------
+pyddlib.bdd module
+------------------
 
-.. automodule:: pydd.bdd
+.. automodule:: pyddlib.bdd
     :members:
     :undoc-members:
     :show-inheritance:
 
-pydd.dd module
---------------
+pyddlib.dd module
+-----------------
 
-.. automodule:: pydd.dd
+.. automodule:: pyddlib.dd
     :members:
     :undoc-members:
     :show-inheritance:
@@ -24,7 +24,7 @@ pydd.dd module
 Module contents
 ---------------
 
-.. automodule:: pydd
+.. automodule:: pyddlib
     :members:
     :undoc-members:
     :show-inheritance:
