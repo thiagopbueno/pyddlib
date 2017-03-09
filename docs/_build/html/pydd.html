@@ -1,0 +1,325 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pydd package &#8212; pydd v0.1.0-alpha documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'v0.1.0-alpha',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to pydd’s documentation!" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to pydd’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pydd v0.1.0-alpha documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="pydd-package">
+<h1>pydd package<a class="headerlink" href="#pydd-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pydd.bdd">
+<span id="pydd-bdd-module"></span><h2>pydd.bdd module<a class="headerlink" href="#module-pydd.bdd" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pydd.bdd.BDD">
+<em class="property">class </em><code class="descclassname">pydd.bdd.</code><code class="descname">BDD</code><span class="sig-paren">(</span><em>index</em>, <em>low</em>, <em>high</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pydd/bdd.html#BDD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pydd.bdd.BDD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pydd.dd.DD" title="pydd.dd.DD"><code class="xref py py-class docutils literal"><span class="pre">pydd.dd.DD</span></code></a></p>
+<p>Reduced Ordered Binary Decision Diagram class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>index</strong> (<em>int</em>) &#8211; root vertex variable index (-1 if terminal vertex)</li>
+<li><strong>low</strong> (<em>pydd.BDD</em>) &#8211; low child vertex of BDD (None if terminal vertex)</li>
+<li><strong>high</strong> (<em>pydd.BDD</em>) &#8211; high child vertex of BDD (None if terminal vertex)</li>
+<li><strong>value</strong> &#8211; terminal boolean value (None if non-terminal vertex)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pydd.bdd.BDD.is_one">
+<code class="descname">is_one</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pydd/bdd.html#BDD.is_one"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pydd.bdd.BDD.is_one" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if BDD function represents boolean value True.
+Otherwise, return False.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pydd.bdd.BDD.is_terminal">
+<code class="descname">is_terminal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pydd/bdd.html#BDD.is_terminal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pydd.bdd.BDD.is_terminal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if BDD function represents a constant value.
+Otherwise, return False.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pydd.bdd.BDD.is_variable">
+<code class="descname">is_variable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pydd/bdd.html#BDD.is_variable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pydd.bdd.BDD.is_variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if BDD function represents the function
+of a single boolean variable. Otherwise, return False.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pydd.bdd.BDD.is_zero">
+<code class="descname">is_zero</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pydd/bdd.html#BDD.is_zero"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pydd.bdd.BDD.is_zero" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if BDD function represents boolean value False.
+Otherwise, return False.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="pydd.bdd.BDD.one">
+<em class="property">classmethod </em><code class="descname">one</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pydd/bdd.html#BDD.one"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pydd.bdd.BDD.one" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the BDD representing the constant function True.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">pydd.BDD</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="pydd.bdd.BDD.terminal">
+<em class="property">classmethod </em><code class="descname">terminal</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pydd/bdd.html#BDD.terminal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pydd.bdd.BDD.terminal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a terminal node with a given boolean <cite>value</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>bool</em>) &#8211; True or False</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">pydd.BDD</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="pydd.bdd.BDD.variable">
+<em class="property">classmethod </em><code class="descname">variable</code><span class="sig-paren">(</span><em>index</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pydd/bdd.html#BDD.variable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pydd.bdd.BDD.variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the BDD representing the function of a
+single boolean variable with given <cite>index</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<em>int</em>) &#8211; variable index</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">pydd.BDD</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="pydd.bdd.BDD.zero">
+<em class="property">classmethod </em><code class="descname">zero</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pydd/bdd.html#BDD.zero"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pydd.bdd.BDD.zero" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the BDD representing the constant function False.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">pydd.BDD</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pydd.dd">
+<span id="pydd-dd-module"></span><h2>pydd.dd module<a class="headerlink" href="#module-pydd.dd" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pydd.dd.DD">
+<em class="property">class </em><code class="descclassname">pydd.dd.</code><code class="descname">DD</code><a class="reference internal" href="_modules/pydd/dd.html#DD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pydd.dd.DD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Decision Diagram abstract base class.</p>
+<dl class="classmethod">
+<dt id="pydd.dd.DD.apply">
+<em class="property">classmethod </em><code class="descname">apply</code><span class="sig-paren">(</span><em>v1</em>, <em>v2</em>, <em>op</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pydd/dd.html#DD.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pydd.dd.DD.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a new canonical representation of the
+pydd.DD object for the result of <cite>v1</cite> <cite>op</cite> <cite>v2</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>v1</strong> (<em>pydd.DD</em>) &#8211; root vertex of left operand</li>
+<li><strong>v2</strong> (<em>pydd.DD</em>) &#8211; root vertex of right operand</li>
+<li><strong>op</strong> (<em>callable object</em><em> or </em><em>function</em>) &#8211; a binary operator</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pydd.DD</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="pydd.dd.DD.reduce">
+<em class="property">classmethod </em><code class="descname">reduce</code><span class="sig-paren">(</span><em>v</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pydd/dd.html#DD.reduce"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pydd.dd.DD.reduce" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduce in place a pydd.DD object rooted in <cite>v</cite> by
+removing duplicate nodes and redundant sub-trees.
+Return the canonical representation of the pydd.DD object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>v</strong> (<em>pydd.DD</em>) &#8211; root vertex</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">pydd.DD</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="pydd.dd.DD.restrict">
+<em class="property">classmethod </em><code class="descname">restrict</code><span class="sig-paren">(</span><em>v</em>, <em>valuation</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pydd/dd.html#DD.restrict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pydd.dd.DD.restrict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pydd">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pydd" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">pydd package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-pydd.bdd">pydd.bdd module</a></li>
+<li><a class="reference internal" href="#module-pydd.dd">pydd.dd module</a></li>
+<li><a class="reference internal" href="#module-pydd">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to pydd&#8217;s documentation!</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/pydd.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to pydd’s documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pydd v0.1.0-alpha documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Author.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pydd.dd &#8212; pydd v0.1.0-alpha documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     'v0.1.0-alpha',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">pydd v0.1.0-alpha documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for pydd.dd</h1><div class="highlight"><pre>
+<span></span><span class="c1"># This file is part of pydd package.</span>
+
+<span class="c1"># pydd is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+
+<span class="c1"># pydd is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with pydd. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<div class="viewcode-block" id="DD"><a class="viewcode-back" href="../../pydd.html#pydd.dd.DD">[docs]</a><span class="k">class</span> <span class="nc">DD</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot; Decision Diagram abstract base class. &quot;&quot;&quot;</span>
+
+	<span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Initialize and return an iterator for pydd.DD objects.</span>
+
+<span class="sd">		:rtype: pydd.DD</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">__traversed</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">__fringe</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="p">]</span>
+		<span class="k">return</span> <span class="bp">self</span>
+
+	<span class="k">def</span> <span class="nf">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Implement a graph-based traversal algorithm for pydd.DD objects.</span>
+<span class="sd">		Each vertex is visited exactly once. Low child is visited before</span>
+<span class="sd">		high child. Return the next vertex in the sequence.</span>
+
+<span class="sd">		:rtype: pydd.DD</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__fringe</span><span class="p">:</span>
+			<span class="k">raise</span> <span class="ne">StopIteration</span><span class="p">()</span>
+		<span class="n">vertex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__fringe</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="n">vertex</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">():</span>
+			<span class="n">low</span>  <span class="o">=</span> <span class="n">vertex</span><span class="o">.</span><span class="n">_low</span>
+			<span class="n">high</span> <span class="o">=</span> <span class="n">vertex</span><span class="o">.</span><span class="n">_high</span>
+			<span class="k">if</span> <span class="nb">id</span><span class="p">(</span><span class="n">high</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__traversed</span><span class="p">:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">__fringe</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">high</span><span class="p">)</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">__traversed</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">high</span><span class="p">))</span>
+			<span class="k">if</span> <span class="nb">id</span><span class="p">(</span><span class="n">low</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__traversed</span><span class="p">:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">__fringe</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">low</span><span class="p">)</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">__traversed</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">low</span><span class="p">))</span>
+		<span class="k">return</span> <span class="n">vertex</span>
+
+	<span class="nd">@classmethod</span>
+<div class="viewcode-block" id="DD.reduce"><a class="viewcode-back" href="../../pydd.html#pydd.dd.DD.reduce">[docs]</a>	<span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Reduce in place a pydd.DD object rooted in `v` by</span>
+<span class="sd">		removing duplicate nodes and redundant sub-trees.</span>
+<span class="sd">		Return the canonical representation of the pydd.DD object.</span>
+
+<span class="sd">		:param v: root vertex</span>
+<span class="sd">		:type v: pydd.DD</span>
+<span class="sd">		:rtype: pydd.DD</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">():</span>
+			<span class="k">return</span> <span class="n">v</span>
+
+		<span class="n">vlist</span> <span class="o">=</span> <span class="p">{}</span>
+		<span class="n">subgraph</span> <span class="o">=</span> <span class="p">{}</span>
+		<span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
+			<span class="n">index</span> <span class="o">=</span> <span class="n">vertex</span><span class="o">.</span><span class="n">_index</span>
+			<span class="n">vlist</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">vlist</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="p">[])</span>
+			<span class="n">vlist</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
+
+		<span class="n">nextid</span> <span class="o">=</span> <span class="mi">0</span>
+
+		<span class="n">index_lst</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">vlist</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">index_lst</span><span class="p">:</span>
+			<span class="n">Q</span> <span class="o">=</span> <span class="p">[]</span>
+			<span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">vlist</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+				<span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">():</span>
+					<span class="n">Q</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">u</span><span class="o">.</span><span class="n">_value</span><span class="p">,</span> <span class="n">u</span><span class="p">))</span>
+				<span class="k">elif</span> <span class="n">u</span><span class="o">.</span><span class="n">_low</span><span class="o">.</span><span class="n">_id</span> <span class="o">==</span> <span class="n">u</span><span class="o">.</span><span class="n">_high</span><span class="o">.</span><span class="n">_id</span><span class="p">:</span>
+					<span class="n">u</span><span class="o">.</span><span class="n">_id</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">_low</span><span class="o">.</span><span class="n">_id</span>
+				<span class="k">else</span><span class="p">:</span>
+					<span class="n">Q</span><span class="o">.</span><span class="n">append</span><span class="p">(((</span><span class="n">u</span><span class="o">.</span><span class="n">_low</span><span class="o">.</span><span class="n">_id</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">_high</span><span class="o">.</span><span class="n">_id</span><span class="p">),</span> <span class="n">u</span><span class="p">))</span>
+
+			<span class="n">oldkey</span> <span class="o">=</span> <span class="kc">None</span>
+			<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+				<span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">oldkey</span><span class="p">:</span>
+					<span class="n">u</span><span class="o">.</span><span class="n">_id</span> <span class="o">=</span> <span class="n">nextid</span>
+				<span class="k">else</span><span class="p">:</span>
+					<span class="n">nextid</span> <span class="o">+=</span> <span class="mi">1</span>
+					<span class="n">u</span><span class="o">.</span><span class="n">_id</span> <span class="o">=</span> <span class="n">nextid</span>
+					<span class="n">subgraph</span><span class="p">[</span><span class="n">nextid</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span>
+					<span class="k">if</span> <span class="ow">not</span> <span class="n">u</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">():</span>
+						<span class="n">u</span><span class="o">.</span><span class="n">_low</span> <span class="o">=</span> <span class="n">subgraph</span><span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">_low</span><span class="o">.</span><span class="n">_id</span><span class="p">]</span>
+						<span class="n">u</span><span class="o">.</span><span class="n">_high</span> <span class="o">=</span> <span class="n">subgraph</span><span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">_high</span><span class="o">.</span><span class="n">_id</span><span class="p">]</span>
+					<span class="n">oldkey</span> <span class="o">=</span> <span class="n">key</span>
+
+		<span class="k">return</span> <span class="n">subgraph</span><span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">_id</span><span class="p">]</span></div>
+
+	<span class="nd">@classmethod</span>
+<div class="viewcode-block" id="DD.apply"><a class="viewcode-back" href="../../pydd.html#pydd.dd.DD.apply">[docs]</a>	<span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">op</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Return a new canonical representation of the</span>
+<span class="sd">		pydd.DD object for the result of `v1` `op` `v2`.</span>
+
+<span class="sd">		:param v1: root vertex of left operand</span>
+<span class="sd">		:type v1: pydd.DD</span>
+<span class="sd">		:param v2: root vertex of right operand</span>
+<span class="sd">		:type v2: pydd.DD</span>
+<span class="sd">		:param op: a binary operator</span>
+<span class="sd">		:type op: callable object or function</span>
+<span class="sd">		:rtype: pydd.DD</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">T</span> <span class="o">=</span> <span class="p">{}</span>
+		<span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">__apply_step</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">T</span><span class="p">))</span></div>
+
+	<span class="nd">@classmethod</span>
+	<span class="k">def</span> <span class="nf">__apply_step</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Private auxiliary method used in pydd.DD.apply method.</span>
+<span class="sd">		Recursively computes `v1` `op` `v2`. If the result was</span>
+<span class="sd">		already computed as an intermediate result, it returns</span>
+<span class="sd">		the cached result stored in `T`.</span>
+
+<span class="sd">		:param v1: root vertex of left operand</span>
+<span class="sd">		:type v1: pydd.DD</span>
+<span class="sd">		:param v2: root vertex of right operand</span>
+<span class="sd">		:type v2: pydd.DD</span>
+<span class="sd">		:param op: a binary operator</span>
+<span class="sd">		:type op: callable object or function</span>
+<span class="sd">		:param T: cached intermediate results</span>
+<span class="sd">		:type T: dict( (int,int), pydd.DD )</span>
+<span class="sd">		:rtype: pydd.DD</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">u</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">get</span><span class="p">((</span><span class="n">v1</span><span class="o">.</span><span class="n">_id</span><span class="p">,</span> <span class="n">v2</span><span class="o">.</span><span class="n">_id</span><span class="p">))</span>
+		<span class="k">if</span> <span class="n">u</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+			<span class="k">return</span> <span class="n">u</span>
+
+		<span class="k">if</span> <span class="n">v1</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">()</span> <span class="ow">and</span> <span class="n">v2</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">():</span>
+			<span class="n">result</span> <span class="o">=</span> <span class="n">v1</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">terminal</span><span class="p">(</span><span class="n">op</span><span class="p">(</span><span class="n">v1</span><span class="o">.</span><span class="n">_value</span><span class="p">,</span> <span class="n">v2</span><span class="o">.</span><span class="n">_value</span><span class="p">))</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">v1index</span> <span class="o">=</span> <span class="n">v2index</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span>
+			<span class="k">if</span> <span class="ow">not</span> <span class="n">v1</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">():</span>
+				<span class="n">v1index</span> <span class="o">=</span> <span class="n">v1</span><span class="o">.</span><span class="n">_index</span>
+			<span class="k">if</span> <span class="ow">not</span> <span class="n">v2</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">():</span>
+				<span class="n">v2index</span> <span class="o">=</span> <span class="n">v2</span><span class="o">.</span><span class="n">_index</span>
+			<span class="n">index_min</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">v1index</span><span class="p">,</span> <span class="n">v2index</span><span class="p">)</span>
+
+			<span class="k">if</span> <span class="n">v1</span><span class="o">.</span><span class="n">_index</span> <span class="o">==</span> <span class="n">index_min</span><span class="p">:</span>
+				<span class="n">vlow1</span>  <span class="o">=</span> <span class="n">v1</span><span class="o">.</span><span class="n">_low</span>
+				<span class="n">vhigh1</span> <span class="o">=</span> <span class="n">v1</span><span class="o">.</span><span class="n">_high</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="n">vlow1</span> <span class="o">=</span> <span class="n">vhigh1</span> <span class="o">=</span> <span class="n">v1</span>
+
+			<span class="k">if</span> <span class="n">v2</span><span class="o">.</span><span class="n">_index</span> <span class="o">==</span> <span class="n">index_min</span><span class="p">:</span>
+				<span class="n">vlow2</span>  <span class="o">=</span> <span class="n">v2</span><span class="o">.</span><span class="n">_low</span>
+				<span class="n">vhigh2</span> <span class="o">=</span> <span class="n">v2</span><span class="o">.</span><span class="n">_high</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="n">vlow2</span> <span class="o">=</span> <span class="n">vhigh2</span> <span class="o">=</span> <span class="n">v2</span>
+
+			<span class="n">low</span>  <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__apply_step</span><span class="p">(</span><span class="n">vlow1</span><span class="p">,</span> <span class="n">vlow2</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+			<span class="n">high</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__apply_step</span><span class="p">(</span><span class="n">vhigh1</span><span class="p">,</span> <span class="n">vhigh2</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+			<span class="n">result</span> <span class="o">=</span> <span class="n">v1</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">index_min</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+		<span class="n">T</span><span class="p">[(</span><span class="n">v1</span><span class="o">.</span><span class="n">_id</span><span class="p">,</span> <span class="n">v2</span><span class="o">.</span><span class="n">_id</span><span class="p">)]</span> <span class="o">=</span> <span class="n">result</span>
+		<span class="k">return</span> <span class="n">result</span>
+
+	<span class="nd">@classmethod</span>
+<div class="viewcode-block" id="DD.restrict"><a class="viewcode-back" href="../../pydd.html#pydd.dd.DD.restrict">[docs]</a>	<span class="k">def</span> <span class="nf">restrict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">valuation</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">__restrict_step</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">valuation</span><span class="p">))</span></div>
+
+	<span class="nd">@classmethod</span>
+	<span class="k">def</span> <span class="nf">__restrict_step</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">valuation</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">():</span>
+			<span class="k">return</span> <span class="n">v</span>
+
+		<span class="n">val</span> <span class="o">=</span> <span class="n">valuation</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">_index</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+			<span class="n">low</span>  <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__restrict_step</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">_low</span><span class="p">,</span>  <span class="n">valuation</span><span class="p">)</span>
+			<span class="n">high</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__restrict_step</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">_high</span><span class="p">,</span> <span class="n">valuation</span><span class="p">)</span>
+			<span class="k">return</span> <span class="n">v</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">_index</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">val</span><span class="p">:</span>
+				<span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__restrict_step</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">_high</span><span class="p">,</span> <span class="n">valuation</span><span class="p">)</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__restrict_step</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">_low</span><span class="p">,</span> <span class="n">valuation</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">pydd v0.1.0-alpha documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Author.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
+    </div>
+  </body>
+</html>
