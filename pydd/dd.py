@@ -61,6 +61,9 @@ class DD(object):
 		:type v: pydd.DD
 		:rtype: pydd.DD
 		"""
+		if v.is_terminal():
+			return v
+
 		vlist = {}
 		subgraph = {}
 		for vertex in v:
@@ -69,8 +72,8 @@ class DD(object):
 			vlist[index].append(vertex)
 
 		nextid = 0
-		index_lst = [-1] + sorted(list(vlist), reverse=True)[:-1]
 
+		index_lst = [-1] + sorted(list(vlist), reverse=True)[:-1]
 		for i in index_lst:
 			Q = []
 			for u in vlist[i]:
@@ -81,7 +84,7 @@ class DD(object):
 				else:
 					Q.append(((u._low._id, u._high._id), u))
 
-			oldkey = (-1, -1)
+			oldkey = None
 			for key, u in sorted(Q, key=lambda x: x[0]):
 				if key == oldkey:
 					u._id = nextid

@@ -66,6 +66,14 @@ class TestBDD(unittest.TestCase):
 			self.assertTrue(var._value is None)
 
 	def test_reduce(self):
+		one  = self.one
+		zero = self.zero
+		self.assertEqual(BDD.reduce(one),  one)
+		self.assertEqual(BDD.reduce(zero), zero)
+
+		vars = [ self.x1, self.x2, self.x3 ]
+		self.assertEqual([BDD.reduce(var) for var in vars], vars)
+
 		# Reference [1] - Figure 5
 		dd1 = BDD(-1, None, None, True)
 		dd2 = BDD(-1, None, None, False)
