@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pydd.bdd &#8212; pydd v0.1.0-alpha documentation</title>
+    <title>pyddlib.bdd &#8212; pyddlib v0.1.0-alpha documentation</title>
     
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">pydd v0.1.0-alpha documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">pyddlib v0.1.0-alpha documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -47,7 +47,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <h1>Source code for pydd.bdd</h1><div class="highlight"><pre>
+  <h1>Source code for pyddlib.bdd</h1><div class="highlight"><pre>
 <span></span><span class="c1"># This file is part of pydd package.</span>
 
 <span class="c1"># pydd is free software: you can redistribute it and/or modify</span>
@@ -63,9 +63,9 @@
 <span class="c1"># You should have received a copy of the GNU General Public License</span>
 <span class="c1"># along with pydd. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 
-<span class="kn">from</span> <span class="nn">pydd.dd</span> <span class="k">import</span> <span class="n">DD</span>
+<span class="kn">from</span> <span class="nn">pyddlib.dd</span> <span class="k">import</span> <span class="n">DD</span>
 
-<div class="viewcode-block" id="BDD"><a class="viewcode-back" href="../../pydd.html#pydd.bdd.BDD">[docs]</a><span class="k">class</span> <span class="nc">BDD</span><span class="p">(</span><span class="n">DD</span><span class="p">):</span>
+<div class="viewcode-block" id="BDD"><a class="viewcode-back" href="../../pyddlib.html#pyddlib.bdd.BDD">[docs]</a><span class="k">class</span> <span class="nc">BDD</span><span class="p">(</span><span class="n">DD</span><span class="p">):</span>
 	<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">	Reduced Ordered Binary Decision Diagram class.</span>
 
@@ -116,7 +116,7 @@
 				<span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">vertex</span><span class="o">.</span><span class="n">_low</span><span class="p">,</span>  <span class="n">indentation</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">))</span>
 		<span class="k">return</span> <span class="n">ddrepr</span>
 
-<div class="viewcode-block" id="BDD.is_terminal"><a class="viewcode-back" href="../../pydd.html#pydd.bdd.BDD.is_terminal">[docs]</a>	<span class="k">def</span> <span class="nf">is_terminal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BDD.is_terminal"><a class="viewcode-back" href="../../pyddlib.html#pyddlib.bdd.BDD.is_terminal">[docs]</a>	<span class="k">def</span> <span class="nf">is_terminal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Return True if BDD function represents a constant value.</span>
 <span class="sd">		Otherwise, return False.</span>
@@ -127,7 +127,7 @@
 				<span class="bp">self</span><span class="o">.</span><span class="n">_high</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> \
 				<span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="ow">in</span> <span class="p">[</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span> <span class="p">]</span></div>
 
-<div class="viewcode-block" id="BDD.is_one"><a class="viewcode-back" href="../../pydd.html#pydd.bdd.BDD.is_one">[docs]</a>	<span class="k">def</span> <span class="nf">is_one</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BDD.is_one"><a class="viewcode-back" href="../../pyddlib.html#pyddlib.bdd.BDD.is_one">[docs]</a>	<span class="k">def</span> <span class="nf">is_one</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Return True if BDD function represents boolean value True.</span>
 <span class="sd">		Otherwise, return False.</span>
@@ -136,7 +136,7 @@
 <span class="sd">		&quot;&quot;&quot;</span>
 		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">==</span> <span class="kc">True</span></div>
 
-<div class="viewcode-block" id="BDD.is_zero"><a class="viewcode-back" href="../../pydd.html#pydd.bdd.BDD.is_zero">[docs]</a>	<span class="k">def</span> <span class="nf">is_zero</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BDD.is_zero"><a class="viewcode-back" href="../../pyddlib.html#pyddlib.bdd.BDD.is_zero">[docs]</a>	<span class="k">def</span> <span class="nf">is_zero</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Return True if BDD function represents boolean value False.</span>
 <span class="sd">		Otherwise, return False.</span>
@@ -145,7 +145,7 @@
 <span class="sd">		&quot;&quot;&quot;</span>
 		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">==</span> <span class="kc">False</span></div>
 
-<div class="viewcode-block" id="BDD.is_variable"><a class="viewcode-back" href="../../pydd.html#pydd.bdd.BDD.is_variable">[docs]</a>	<span class="k">def</span> <span class="nf">is_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BDD.is_variable"><a class="viewcode-back" href="../../pyddlib.html#pyddlib.bdd.BDD.is_variable">[docs]</a>	<span class="k">def</span> <span class="nf">is_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Return True if BDD function represents the function</span>
 <span class="sd">		of a single boolean variable. Otherwise, return False.</span>
@@ -218,7 +218,7 @@
 		<span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">other</span>
 
 	<span class="nd">@classmethod</span>
-<div class="viewcode-block" id="BDD.terminal"><a class="viewcode-back" href="../../pydd.html#pydd.bdd.BDD.terminal">[docs]</a>	<span class="k">def</span> <span class="nf">terminal</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<div class="viewcode-block" id="BDD.terminal"><a class="viewcode-back" href="../../pyddlib.html#pyddlib.bdd.BDD.terminal">[docs]</a>	<span class="k">def</span> <span class="nf">terminal</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Return a terminal node with a given boolean `value`.</span>
 
@@ -230,7 +230,7 @@
 		<span class="k">return</span> <span class="n">BDD</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
 
 	<span class="nd">@classmethod</span>
-<div class="viewcode-block" id="BDD.one"><a class="viewcode-back" href="../../pydd.html#pydd.bdd.BDD.one">[docs]</a>	<span class="k">def</span> <span class="nf">one</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<div class="viewcode-block" id="BDD.one"><a class="viewcode-back" href="../../pyddlib.html#pyddlib.bdd.BDD.one">[docs]</a>	<span class="k">def</span> <span class="nf">one</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Return the BDD representing the constant function True.</span>
 
@@ -242,7 +242,7 @@
 		<span class="k">return</span> <span class="n">BDD</span><span class="o">.</span><span class="n">__one</span></div>
 
 	<span class="nd">@classmethod</span>
-<div class="viewcode-block" id="BDD.zero"><a class="viewcode-back" href="../../pydd.html#pydd.bdd.BDD.zero">[docs]</a>	<span class="k">def</span> <span class="nf">zero</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<div class="viewcode-block" id="BDD.zero"><a class="viewcode-back" href="../../pyddlib.html#pyddlib.bdd.BDD.zero">[docs]</a>	<span class="k">def</span> <span class="nf">zero</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Return the BDD representing the constant function False.</span>
 
@@ -254,7 +254,7 @@
 		<span class="k">return</span> <span class="n">BDD</span><span class="o">.</span><span class="n">__zero</span></div>
 
 	<span class="nd">@classmethod</span>
-<div class="viewcode-block" id="BDD.variable"><a class="viewcode-back" href="../../pydd.html#pydd.bdd.BDD.variable">[docs]</a>	<span class="k">def</span> <span class="nf">variable</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+<div class="viewcode-block" id="BDD.variable"><a class="viewcode-back" href="../../pyddlib.html#pyddlib.bdd.BDD.variable">[docs]</a>	<span class="k">def</span> <span class="nf">variable</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Return the BDD representing the function of a</span>
 <span class="sd">		single boolean variable with given `index`.</span>
@@ -294,7 +294,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">pydd v0.1.0-alpha documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">pyddlib v0.1.0-alpha documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

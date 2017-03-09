@@ -1,4 +1,4 @@
-import pydd
+import pyddlib
 
 from setuptools import setup
 import os
@@ -7,16 +7,16 @@ def read(filename):
 	return open(os.path.join(os.path.dirname(__file__), filename), 'r').read()
 
 setup(
-	name = 'pydd',
-	version = pydd.__version__,
+	name = 'pyddlib',
+	version = pyddlib.__version__,
 	author = 'Thiago P. Bueno',
 	author_email = 'thiago.pbueno@gmail.com',
-	description = 'pydd is a Python3 library for manipulating decision diagrams (DD).',
+	description = 'pyddlib is a Python3 library for manipulating decision diagrams (DD).',
 	long_description = read('README.rst'),
 	license = 'GNU General Public License v3.0',
 	keywords = ['decision diagrams', 'BDD', 'ADD', 'symbolic', 'boolean', 'data structure'],
-	url = 'https://github.com/thiagopbueno/pydd',
-	packages = ['pydd', 'tests'],
+	url = 'https://github.com/thiagopbueno/pyddlib',
+	packages = ['pyddlib', 'tests'],
 	zip_safe = False,
 	classifiers = [
 		'Development Status :: 3 - Alpha',

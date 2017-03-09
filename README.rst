@@ -1,7 +1,7 @@
-pydd
-====
+pyddlib
+=======
 
-pydd is a Python3 library for manipulating decision diagrams (DD).
+pyddlib is a Python3 library for manipulating decision diagrams (DD).
 
 It is intended to follow (as much as possible) the notation and overall
 construction proposed in the following papers:
@@ -26,7 +26,7 @@ It is required to have Python3 installed.
 
 ::
 
-    $ pip3 install pydd
+    $ pip3 install pyddlib
 
 
 Usage
@@ -40,7 +40,7 @@ functions with logical operations AND (&), OR (\|), XOR (^) and NOT (-).
 
 .. code:: python
 
-    from pydd.BDD import BDD
+    from pyddlib.BDD import BDD
 
     one  = BDD.one()
     zero = BDD.zero()
@@ -114,15 +114,15 @@ LICENSE
 
 Copyright (c) 2017 Thiago Pereira Bueno All Rights Reserved.
 
-pydd is free software: you can redistribute it and/or modify it under
+pyddlib is free software: you can redistribute it and/or modify it under
 the terms of the GNU Lesser General Public License as published by the
 Free Software Foundation, either version 3 of the License, or (at your
 option) any later version.
 
-pydd is distributed in the hope that it will be useful, but WITHOUT ANY
+pyddlib is distributed in the hope that it will be useful, but WITHOUT ANY
 WARRANTY; without even the implied warranty of MERCHANTABILITY or
 FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
 License for more details.
 
 You should have received a copy of the GNU Lesser General Public License
-along with pydd. If not, see http://www.gnu.org/licenses/
+along with pyddlib. If not, see http://www.gnu.org/licenses/
