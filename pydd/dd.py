@@ -166,3 +166,23 @@ class DD(object):
 
 		T[(v1._id, v2._id)] = result
 		return result
+
+	@classmethod
+	def restrict(cls, v, valuation):
+		return cls.reduce(cls.__restrict_step(v, valuation))
+
+	@classmethod
+	def __restrict_step(cls, v, valuation):
+		if v.is_terminal():
+			return v
+
+		val = valuation.get(v._index, None)
+		if val is None:
+			low  = cls.__restrict_step(v._low,  valuation)
+			high = cls.__restrict_step(v._high, valuation)
+			return v.__class__(v._index, low, high, None)
+		else:
+			if val:
+				return cls.__restrict_step(v._high, valuation)
+			else:
+				return cls.__restrict_step(v._low, valuation)

@@ -92,6 +92,84 @@ class TestBDD(unittest.TestCase):
 			else:
 				self.assertEqual(val, dd._index)
 
+	def test_restrict(self):
+		one = self.one
+		zero = self.zero
+		x1, x2, x3 = self.x1, self.x2, self.x3
+
+		valuation = { 1: True, 2: False, 3: True }
+		self.assertEqual(BDD.restrict(one, valuation),  one)
+		self.assertEqual(BDD.restrict(zero, valuation), zero)
+
+		vars = [ x1, x2, x3 ]
+		for i, var in enumerate(vars):
+			if valuation[i+1]:
+				self.assertEqual(BDD.restrict(var, valuation), one)
+			else:
+				self.assertEqual(BDD.restrict(var, valuation), zero)
+
+		f1 = x1 & (-x2)
+		val1 = [ (1, False), (2, False) ]
+		self.assertEqual(BDD.restrict(f1, dict(val1[:1])), zero)
+		self.assertEqual(BDD.restrict(f1, dict(val1[1:])), x1)
+		self.assertEqual(BDD.restrict(f1, dict(val1)), zero)
+		val2 = [ (1, False), (2, True)  ]
+		self.assertEqual(BDD.restrict(f1, dict(val2[:1])), zero)
+		self.assertEqual(BDD.restrict(f1, dict(val2[1:])), zero)
+		self.assertEqual(BDD.restrict(f1, dict(val2)), zero)
+		val3 = [ (1, True),  (2, False) ]
+		self.assertEqual(BDD.restrict(f1, dict(val3[:1])), -x2)
+		self.assertEqual(BDD.restrict(f1, dict(val3[1:])), x1)
+		self.assertEqual(BDD.restrict(f1, dict(val3)), one)
+		val4 = [ (1, True),  (2, True)  ]
+		self.assertEqual(BDD.restrict(f1, dict(val4[:1])), -x2)
+		self.assertEqual(BDD.restrict(f1, dict(val4[1:])), zero)
+		self.assertEqual(BDD.restrict(f1, dict(val4)), zero)
+
+		f2 = x2 & (-x3)
+		val0 = [ (1, False), (4, False) ]
+		self.assertEqual(BDD.restrict(f2, dict(val0)), f2)
+		val0 = [ (1, False), (4, True) ]
+		self.assertEqual(BDD.restrict(f2, dict(val0)), f2)
+		val0 = [ (1, True), (4, False) ]
+		self.assertEqual(BDD.restrict(f2, dict(val0)), f2)
+		val0 = [ (1, True), (4, True) ]
+		self.assertEqual(BDD.restrict(f2, dict(val0)), f2)
+
+		f3 = -x2 | x3
+		val1 = [ (1, False), (2, False), (3, False), (4, False) ]
+		self.assertEqual(BDD.restrict(f3, dict(val1)), one)
+		val2 = [ (1, True), (2, False), (3, False), (4, False) ]
+		self.assertEqual(BDD.restrict(f3, dict(val2)), one)
+		val3 = [ (1, False), (2, True), (3, False), (4, False) ]
+		self.assertEqual(BDD.restrict(f3, dict(val3)), zero)
+		val4 = [ (1, True), (2, True), (3, False), (4, False) ]
+		self.assertEqual(BDD.restrict(f3, dict(val4)), zero)
+		val5 = [ (1, False), (2, False), (3, True), (4, False) ]
+		self.assertEqual(BDD.restrict(f3, dict(val5)), one)
+		val6 = [ (1, True), (2, False), (3, True), (4, False) ]
+		self.assertEqual(BDD.restrict(f3, dict(val6)), one)
+		val7 = [ (1, False), (2, True), (3, True), (4, False) ]
+		self.assertEqual(BDD.restrict(f3, dict(val7)), one)
+		val8 = [ (1, True), (2, True), (3, True), (4, False) ]
+		self.assertEqual(BDD.restrict(f3, dict(val8)), one)
+		val9 = [ (1, False), (2, False), (3, False), (4, True) ]
+		self.assertEqual(BDD.restrict(f3, dict(val9)), one)
+		val10 = [ (1, True), (2, False), (3, False), (4, True) ]
+		self.assertEqual(BDD.restrict(f3, dict(val10)), one)
+		val11 = [ (1, False), (2, True), (3, False), (4, True) ]
+		self.assertEqual(BDD.restrict(f3, dict(val11)), zero)
+		val12 = [ (1, True), (2, True), (3, False), (4, True) ]
+		self.assertEqual(BDD.restrict(f3, dict(val12)), zero)
+		val13 = [ (1, False), (2, False), (3, True), (4, True) ]
+		self.assertEqual(BDD.restrict(f3, dict(val13)), one)
+		val14 = [ (1, True), (2, False), (3, True), (4, True) ]
+		self.assertEqual(BDD.restrict(f3, dict(val14)), one)
+		val15 = [ (1, False), (2, True), (3, True), (4, True) ]
+		self.assertEqual(BDD.restrict(f3, dict(val15)), one)
+		val16 = [ (1, True), (2, True), (3, True), (4, True) ]
+		self.assertEqual(BDD.restrict(f3, dict(val16)), one)
+
 	def test_not(self):
 		one = -self.zero
 		one.is_one()
