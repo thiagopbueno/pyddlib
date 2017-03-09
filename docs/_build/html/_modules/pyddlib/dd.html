@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pydd.dd &#8212; pydd v0.1.0-alpha documentation</title>
+    <title>pyddlib.dd &#8212; pyddlib v0.1.0-alpha documentation</title>
     
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">pydd v0.1.0-alpha documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">pyddlib v0.1.0-alpha documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -47,7 +47,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <h1>Source code for pydd.dd</h1><div class="highlight"><pre>
+  <h1>Source code for pyddlib.dd</h1><div class="highlight"><pre>
 <span></span><span class="c1"># This file is part of pydd package.</span>
 
 <span class="c1"># pydd is free software: you can redistribute it and/or modify</span>
@@ -65,7 +65,7 @@
 
 <span class="kn">import</span> <span class="nn">sys</span>
 
-<div class="viewcode-block" id="DD"><a class="viewcode-back" href="../../pydd.html#pydd.dd.DD">[docs]</a><span class="k">class</span> <span class="nc">DD</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="DD"><a class="viewcode-back" href="../../pyddlib.html#pyddlib.dd.DD">[docs]</a><span class="k">class</span> <span class="nc">DD</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 	<span class="sd">&quot;&quot;&quot; Decision Diagram abstract base class. &quot;&quot;&quot;</span>
 
 	<span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -101,7 +101,7 @@
 		<span class="k">return</span> <span class="n">vertex</span>
 
 	<span class="nd">@classmethod</span>
-<div class="viewcode-block" id="DD.reduce"><a class="viewcode-back" href="../../pydd.html#pydd.dd.DD.reduce">[docs]</a>	<span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+<div class="viewcode-block" id="DD.reduce"><a class="viewcode-back" href="../../pyddlib.html#pyddlib.dd.DD.reduce">[docs]</a>	<span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Reduce in place a pydd.DD object rooted in `v` by</span>
 <span class="sd">		removing duplicate nodes and redundant sub-trees.</span>
@@ -150,7 +150,7 @@
 		<span class="k">return</span> <span class="n">subgraph</span><span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">_id</span><span class="p">]</span></div>
 
 	<span class="nd">@classmethod</span>
-<div class="viewcode-block" id="DD.apply"><a class="viewcode-back" href="../../pydd.html#pydd.dd.DD.apply">[docs]</a>	<span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">op</span><span class="p">):</span>
+<div class="viewcode-block" id="DD.apply"><a class="viewcode-back" href="../../pyddlib.html#pyddlib.dd.DD.apply">[docs]</a>	<span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">op</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Return a new canonical representation of the</span>
 <span class="sd">		pydd.DD object for the result of `v1` `op` `v2`.</span>
@@ -218,7 +218,7 @@
 		<span class="k">return</span> <span class="n">result</span>
 
 	<span class="nd">@classmethod</span>
-<div class="viewcode-block" id="DD.restrict"><a class="viewcode-back" href="../../pydd.html#pydd.dd.DD.restrict">[docs]</a>	<span class="k">def</span> <span class="nf">restrict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">valuation</span><span class="p">):</span>
+<div class="viewcode-block" id="DD.restrict"><a class="viewcode-back" href="../../pyddlib.html#pyddlib.dd.DD.restrict">[docs]</a>	<span class="k">def</span> <span class="nf">restrict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">valuation</span><span class="p">):</span>
 		<span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">__restrict_step</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">valuation</span><span class="p">))</span></div>
 
 	<span class="nd">@classmethod</span>
@@ -266,7 +266,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">pydd v0.1.0-alpha documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">pyddlib v0.1.0-alpha documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

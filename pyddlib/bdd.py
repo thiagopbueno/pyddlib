@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU General Public License
 # along with pydd. If not, see <http://www.gnu.org/licenses/>.
 
-from pydd.dd import DD
+from pyddlib.dd import DD
 
 class BDD(DD):
 	"""
