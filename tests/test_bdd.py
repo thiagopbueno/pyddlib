@@ -19,8 +19,7 @@ import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../pyddlib/'))
 
-# from pyddlib.bdd import BDD
-from bdd import BDD
+from pyddlib.bdd import BDD
 
 import unittest
 
@@ -69,11 +68,11 @@ class TestBDD(unittest.TestCase):
 	def test_reduce(self):
 		one  = self.one
 		zero = self.zero
-		self.assertEqual(BDD.reduce(one),  one)
-		self.assertEqual(BDD.reduce(zero), zero)
+		self.assertEqual(one.reduce(),  one)
+		self.assertEqual(zero.reduce(), zero)
 
 		vars = [ self.x1, self.x2, self.x3 ]
-		self.assertEqual([BDD.reduce(var) for var in vars], vars)
+		self.assertEqual([var.reduce() for var in vars], vars)
 
 		# Reference [1] - Figure 5
 		dd1 = BDD(-1, None, None, True)
@@ -85,7 +84,7 @@ class TestBDD(unittest.TestCase):
 		dd7 = BDD(2, dd6, dd5, None)
 		dd8 = BDD(2, dd4, dd6, None)
 		dd9 = BDD(1, dd8, dd7, None)
-		rdd9 = BDD.reduce(dd9)
+		rdd9 = dd9.reduce()
 		expected = [ 1, 2, False, 3, True ]
 		for dd, val in zip(rdd9, expected):
 			if dd.is_terminal():

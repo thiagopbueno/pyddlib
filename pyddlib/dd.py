@@ -52,23 +52,20 @@ class DD(object):
 				self.__traversed.add(id(low))
 		return vertex
 
-	@classmethod
-	def reduce(cls, v):
+	def reduce(self):
 		"""
-		Reduce in place a pyddlib.DD object rooted in `v` by
+		Reduce in place a pyddlib.DD object rooted in `self` by
 		removing duplicate nodes and redundant sub-trees.
 		Return the canonical representation of the pyddlib.DD object.
 
-		:param v: root vertex
-		:type v: pyddlib.DD
 		:rtype: pyddlib.DD
 		"""
-		if v.is_terminal():
-			return v
+		if self.is_terminal():
+			return self
 
 		vlist = {}
 		subgraph = {}
-		for vertex in v:
+		for vertex in self:
 			index = vertex._index
 			vlist[index] = vlist.get(index, [])
 			vlist[index].append(vertex)
@@ -105,7 +102,7 @@ class DD(object):
 						u._high = subgraph[u._high._id]
 					oldkey = key
 
-		return subgraph[v._id]
+		return subgraph[self._id]
 
 	@classmethod
 	def apply(cls, v1, v2, op):
@@ -122,12 +119,11 @@ class DD(object):
 		:rtype: pyddlib.DD
 		"""
 		T = {}
-		return cls.reduce(cls.__apply_step(v1, v2, op, T))
+		return cls.__apply_step(v1, v2, op, T).reduce()
 
 	@classmethod
 	def __apply_step(cls, v1, v2, op, T):
 		"""
-		Private auxiliary method used in pyddlib.DD.apply method.
 		Recursively computes `v1` `op` `v2`. If the result was
 		already computed as an intermediate result, it returns
 		the cached result stored in `T`.
@@ -176,9 +172,25 @@ class DD(object):
 		return result
 
 	def restrict(self, valuation):
-		return self.reduce(self.__restrict_step(valuation))
+		"""
+		Return a new reduced ADD with variables in `valuation`.keys()
+		restricted to `valuation`.values().
+
+		:param valuation: mapping from variable index to boolean value
+		:type valuation: dict(int,bool)
+		:rtype: pyddlib.ADD
+		"""
+		return self.__restrict_step(valuation).reduce()
 
 	def __restrict_step(self, valuation):
+		"""
+		Return a new ADD with variables in `valuation`.keys()
+		restricted to `valuation`.values().
+
+		:param valuation: mapping from variable index to boolean value
+		:type valuation: dict(int,bool)
+		:rtype: pyddlib.ADD
+		"""
 		if self.is_terminal():
 			return self
 
