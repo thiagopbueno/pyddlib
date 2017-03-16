@@ -53,13 +53,13 @@ class DD(object):
 	@classmethod
 	def reduce(cls, v):
 		"""
-		Reduce in place a pydd.DD object rooted in `v` by
+		Reduce in place a pyddlib.DD object rooted in `v` by
 		removing duplicate nodes and redundant sub-trees.
-		Return the canonical representation of the pydd.DD object.
+		Return the canonical representation of the pyddlib.DD object.
 
 		:param v: root vertex
-		:type v: pydd.DD
-		:rtype: pydd.DD
+		:type v: pyddlib.DD
+		:rtype: pyddlib.DD
 		"""
 		if v.is_terminal():
 			return v
@@ -86,7 +86,13 @@ class DD(object):
 
 			oldkey = None
 			for key, u in sorted(Q, key=lambda x: x[0]):
-				if key == oldkey:
+				same = False
+				if isinstance(key, Number) and isinstance(oldkey, Number):
+					same = (abs(key - oldkey) <= 1e-6)
+				else:
+					same = (key == oldkey)
+
+				if same:
 					u._id = nextid
 				else:
 					nextid += 1
@@ -167,22 +173,20 @@ class DD(object):
 		T[(v1._id, v2._id)] = result
 		return result
 
-	@classmethod
-	def restrict(cls, v, valuation):
-		return cls.reduce(cls.__restrict_step(v, valuation))
+	def restrict(self, valuation):
+		return self.reduce(self.__restrict_step(valuation))
 
-	@classmethod
-	def __restrict_step(cls, v, valuation):
-		if v.is_terminal():
-			return v
+	def __restrict_step(self, valuation):
+		if self.is_terminal():
+			return self
 
-		val = valuation.get(v._index, None)
+		val = valuation.get(self._index, None)
 		if val is None:
-			low  = cls.__restrict_step(v._low,  valuation)
-			high = cls.__restrict_step(v._high, valuation)
-			return v.__class__(v._index, low, high, None)
+			low  = self._low.__restrict_step(valuation)
+			high = self._high.__restrict_step(valuation)
+			return self.__class__(self._index, low, high, None)
 		else:
 			if val:
-				return cls.__restrict_step(v._high, valuation)
+				return self._high.__restrict_step(valuation)
 			else:
-				return cls.__restrict_step(v._low, valuation)
+				return self._low.__restrict_step(valuation)
