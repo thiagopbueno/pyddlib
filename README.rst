@@ -56,7 +56,7 @@ functions with logical operations AND (&), OR (\|), XOR (^) and NOT (-).
     print(x1)
 
     print("=== NOT x1 ===")
-    print(-x1)
+    print(~x1)
 
     print("=== x1 AND x2 ===")
     print(x1 & x2)
@@ -67,23 +67,23 @@ functions with logical operations AND (&), OR (\|), XOR (^) and NOT (-).
     print("=== x1 XOR x2 ===")
     print(x1 ^ x2)
 
-    bdd1 = -x1 | (x2 ^ -x3)
+    bdd1 = ~x1 | (x2 ^ ~x3)
     if (bdd1 & one) == bdd1:
         print('True is the neutral element for AND operation!')
 
-    bdd2 = -(-x2) ^ (-(x1 | x3))
+    bdd2 = ~(~x2) ^ (~(x1 | x3))
     if (bdd2 | zero) == bdd2:
         print('False is the neutral element for OR operation!')
 
-    bdd3 = x1 & -x1
+    bdd3 = x1 & ~x1
     if bdd3.is_zero():
         print('You can check contradiction with is_zero() funtion!')
 
-    bdd4 = x1 | -x1
+    bdd4 = x1 | ~x1
     if bdd4.is_one():
         print('You can check tautology with is_one() function!')
 
-    bdd5 = -(x1 | -(x2 & -x3))
+    bdd5 = ~(x1 | ~(x2 & ~x3))
     if (bdd5 ^ bdd5).is_zero():
         print('You can check equivalence with XOR!')
 
@@ -99,14 +99,14 @@ functions with logical operations AND (&), OR (\|), XOR (^) and NOT (-).
     if (x1 | (x2 & x3)) == ((x1 | x2) & (x1 | x3)):
         print('Distributivity law works: OR distributes over AND!')
 
-    bdd6 = -(x1 & -(-x2 | x3))
+    bdd6 = ~(x1 & ~(~x2 | x3))
     valuation1 = { 1: True, 2: True, 3: False }
 
     if BDD.restrict(bdd6, valuation1).is_zero():
         print('You can evaluate the function with restrict!')
 
     valuation2 = { 1: True }
-    if BDD.restrict(bdd6, valuation2) == (-x2 | x3):
+    if BDD.restrict(bdd6, valuation2) == (~x2 | x3):
         print('You can also partially evaluate the function with restrict!')
 
 LICENSE
