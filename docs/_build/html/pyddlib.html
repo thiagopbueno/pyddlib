@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyddlib package &#8212; pyddlib v0.1.0-alpha documentation</title>
+    <title>pyddlib package &#8212; pyddlib v0.2.0-alpha documentation</title>
     
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     'v0.1.0-alpha',
+        VERSION:     'v0.2.0-alpha',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -41,7 +41,7 @@
         <li class="right" >
           <a href="index.html" title="Welcome to pyddlib’s documentation!"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pyddlib v0.1.0-alpha documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pyddlib v0.2.0-alpha documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -54,6 +54,169 @@
 <h1>pyddlib package<a class="headerlink" href="#pyddlib-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pyddlib.add">
+<span id="pyddlib-add-module"></span><h2>pyddlib.add module<a class="headerlink" href="#module-pyddlib.add" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pyddlib.add.ADD">
+<em class="property">class </em><code class="descclassname">pyddlib.add.</code><code class="descname">ADD</code><span class="sig-paren">(</span><em>index</em>, <em>low</em>, <em>high</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyddlib/add.html#ADD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyddlib.add.ADD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyddlib.dd.DD" title="pyddlib.dd.DD"><code class="xref py py-class docutils literal"><span class="pre">pyddlib.dd.DD</span></code></a></p>
+<p>Reduced Ordered Algebraic Decision Diagram class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>index</strong> (<em>int</em>) &#8211; root vertex variable index (-1 if terminal vertex)</li>
+<li><strong>low</strong> (<em>pyddlib.ADD</em>) &#8211; low child vertex of ADD (None if terminal vertex)</li>
+<li><strong>high</strong> (<em>pyddlib.ADD</em>) &#8211; high child vertex of ADD (None if terminal vertex)</li>
+<li><strong>value</strong> &#8211; terminal numeric value (None if non-terminal vertex)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="classmethod">
+<dt id="pyddlib.add.ADD.constant">
+<em class="property">classmethod </em><code class="descname">constant</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyddlib/add.html#ADD.constant"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyddlib.add.ADD.constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a terminal node with a given numeric <cite>value</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>Number</em>) &#8211; numeric value</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">pyddlib.ADD</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyddlib.add.ADD.index">
+<code class="descname">index</code><a class="headerlink" href="#pyddlib.add.ADD.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return variable index of node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyddlib.add.ADD.is_constant">
+<code class="descname">is_constant</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyddlib/add.html#ADD.is_constant"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyddlib.add.ADD.is_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if ADD function represents a constant value.
+Otherwise, return False.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyddlib.add.ADD.is_terminal">
+<code class="descname">is_terminal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyddlib/add.html#ADD.is_terminal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyddlib.add.ADD.is_terminal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if ADD function represents a constant value.
+Otherwise, return False.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyddlib.add.ADD.is_variable">
+<code class="descname">is_variable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyddlib/add.html#ADD.is_variable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyddlib.add.ADD.is_variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if ADD function represents the function
+of a single boolean variable. Otherwise, return False.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyddlib.add.ADD.marginalize">
+<code class="descname">marginalize</code><span class="sig-paren">(</span><em>variable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyddlib/add.html#ADD.marginalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyddlib.add.ADD.marginalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute a new reduced ADD with <cite>variable</cite> marginalized.
+Return self.restrict({variable.index: 1}) + self.restrict({variable.index: 0})</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>variable</strong> &#8211; ADD variable node</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">pyddlib.ADD</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="pyddlib.add.ADD.terminal">
+<em class="property">classmethod </em><code class="descname">terminal</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyddlib/add.html#ADD.terminal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyddlib.add.ADD.terminal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a terminal node with a given numeric <cite>value</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>Number</em>) &#8211; numeric value</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">pyddlib.ADD</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyddlib.add.ADD.value">
+<code class="descname">value</code><a class="headerlink" href="#pyddlib.add.ADD.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return node value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Number or None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="pyddlib.add.ADD.variable">
+<em class="property">classmethod </em><code class="descname">variable</code><span class="sig-paren">(</span><em>index</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyddlib/add.html#ADD.variable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyddlib.add.ADD.variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the ADD representing the function of a
+single boolean variable with given <cite>index</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<em>int</em>) &#8211; variable index</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">pyddlib.ADD</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-pyddlib.bdd">
 <span id="pyddlib-bdd-module"></span><h2>pyddlib.bdd module<a class="headerlink" href="#module-pyddlib.bdd" title="Permalink to this headline">¶</a></h2>
@@ -68,8 +231,8 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>index</strong> (<em>int</em>) &#8211; root vertex variable index (-1 if terminal vertex)</li>
-<li><strong>low</strong> (<em>pydd.BDD</em>) &#8211; low child vertex of BDD (None if terminal vertex)</li>
-<li><strong>high</strong> (<em>pydd.BDD</em>) &#8211; high child vertex of BDD (None if terminal vertex)</li>
+<li><strong>low</strong> (<em>pyddlib.BDD</em>) &#8211; low child vertex of BDD (None if terminal vertex)</li>
+<li><strong>high</strong> (<em>pyddlib.BDD</em>) &#8211; high child vertex of BDD (None if terminal vertex)</li>
 <li><strong>value</strong> &#8211; terminal boolean value (None if non-terminal vertex)</li>
 </ul>
 </td>
@@ -144,7 +307,7 @@ Otherwise, return False.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">pydd.BDD</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">pyddlib.BDD</td>
 </tr>
 </tbody>
 </table>
@@ -160,7 +323,7 @@ Otherwise, return False.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>bool</em>) &#8211; True or False</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">pydd.BDD</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">pyddlib.BDD</td>
 </tr>
 </tbody>
 </table>
@@ -177,7 +340,7 @@ single boolean variable with given <cite>index</cite>.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<em>int</em>) &#8211; variable index</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">pydd.BDD</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">pyddlib.BDD</td>
 </tr>
 </tbody>
 </table>
@@ -191,7 +354,7 @@ single boolean variable with given <cite>index</cite>.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">pydd.BDD</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">pyddlib.BDD</td>
 </tr>
 </tbody>
 </table>
@@ -211,47 +374,57 @@ single boolean variable with given <cite>index</cite>.</p>
 <dt id="pyddlib.dd.DD.apply">
 <em class="property">classmethod </em><code class="descname">apply</code><span class="sig-paren">(</span><em>v1</em>, <em>v2</em>, <em>op</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyddlib/dd.html#DD.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyddlib.dd.DD.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a new canonical representation of the
-pydd.DD object for the result of <cite>v1</cite> <cite>op</cite> <cite>v2</cite>.</p>
+pyddlib.DD object for the result of <cite>v1</cite> <cite>op</cite> <cite>v2</cite>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>v1</strong> (<em>pydd.DD</em>) &#8211; root vertex of left operand</li>
-<li><strong>v2</strong> (<em>pydd.DD</em>) &#8211; root vertex of right operand</li>
+<li><strong>v1</strong> (<em>pyddlib.DD</em>) &#8211; root vertex of left operand</li>
+<li><strong>v2</strong> (<em>pyddlib.DD</em>) &#8211; root vertex of right operand</li>
 <li><strong>op</strong> (<em>callable object</em><em> or </em><em>function</em>) &#8211; a binary operator</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pydd.DD</p>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pyddlib.DD</p>
 </td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
-<dl class="classmethod">
+<dl class="method">
 <dt id="pyddlib.dd.DD.reduce">
-<em class="property">classmethod </em><code class="descname">reduce</code><span class="sig-paren">(</span><em>v</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyddlib/dd.html#DD.reduce"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyddlib.dd.DD.reduce" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reduce in place a pydd.DD object rooted in <cite>v</cite> by
+<code class="descname">reduce</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyddlib/dd.html#DD.reduce"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyddlib.dd.DD.reduce" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduce in place a pyddlib.DD object rooted in <cite>self</cite> by
 removing duplicate nodes and redundant sub-trees.
-Return the canonical representation of the pydd.DD object.</p>
+Return the canonical representation of the pyddlib.DD object.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>v</strong> (<em>pydd.DD</em>) &#8211; root vertex</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">pydd.DD</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">pyddlib.DD</td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
-<dl class="classmethod">
+<dl class="method">
 <dt id="pyddlib.dd.DD.restrict">
-<em class="property">classmethod </em><code class="descname">restrict</code><span class="sig-paren">(</span><em>v</em>, <em>valuation</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyddlib/dd.html#DD.restrict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyddlib.dd.DD.restrict" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">restrict</code><span class="sig-paren">(</span><em>valuation</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyddlib/dd.html#DD.restrict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyddlib.dd.DD.restrict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a new reduced ADD with variables in <cite>valuation</cite>.keys()
+restricted to <cite>valuation</cite>.values().</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>valuation</strong> (<em>dict</em><em>(</em><em>int</em><em>,</em><em>bool</em><em>)</em><em></em>) &#8211; mapping from variable index to boolean value</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">pyddlib.ADD</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
@@ -271,6 +444,7 @@ Return the canonical representation of the pydd.DD object.</p>
   <ul>
 <li><a class="reference internal" href="#">pyddlib package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-pyddlib.add">pyddlib.add module</a></li>
 <li><a class="reference internal" href="#module-pyddlib.bdd">pyddlib.bdd module</a></li>
 <li><a class="reference internal" href="#module-pyddlib.dd">pyddlib.dd module</a></li>
 <li><a class="reference internal" href="#module-pyddlib">Module contents</a></li>
@@ -314,7 +488,7 @@ Return the canonical representation of the pydd.DD object.</p>
         <li class="right" >
           <a href="index.html" title="Welcome to pyddlib’s documentation!"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pyddlib v0.1.0-alpha documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">pyddlib v0.2.0-alpha documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
