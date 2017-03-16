@@ -260,7 +260,7 @@ class ADD(DD):
 		:rtype: pyddlib.ADD
 		"""
 		assert(isinstance(value, Number))
-		return ADD(-1, None, None, value)
+		return ADD(-1, None, None, float(value))
 
 	@classmethod
 	def constant(cls, value):
