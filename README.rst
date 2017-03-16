@@ -40,7 +40,7 @@ functions with logical operations AND (&), OR (\|), XOR (^) and NOT (-).
 
 .. code:: python
 
-    from pyddlib.BDD import BDD
+    from pyddlib.bdd import BDD
 
     one  = BDD.one()
     zero = BDD.zero()
@@ -102,12 +102,84 @@ functions with logical operations AND (&), OR (\|), XOR (^) and NOT (-).
     bdd6 = ~(x1 & ~(~x2 | x3))
     valuation1 = { 1: True, 2: True, 3: False }
 
-    if BDD.restrict(bdd6, valuation1).is_zero():
+    if bdd6.restrict(valuation1).is_zero():
         print('You can evaluate the function with restrict!')
 
     valuation2 = { 1: True }
-    if BDD.restrict(bdd6, valuation2) == (~x2 | x3):
+    if bdd6.restrict(valuation2) == (~x2 | x3):
         print('You can also partially evaluate the function with restrict!')
+
+
+Algebraic Decision Diagrams (ADDs)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You create ADDs from constants and variables by composing arithmetic operations functions +, -, *, /.
+
+.. code:: python
+
+    from pyddlib.add import ADD
+
+    c0 = ADD.constant(0.0)
+    c1 = ADD.constant(1.0)
+    c2 = ADD.constant(2.0)
+    print("=== c1 ===")
+    print(c1)
+    print("=== c2 ===")
+    print(c2)
+
+    x1 = ADD.variable(1)
+    x2 = ADD.variable(2)
+    x3 = ADD.variable(3)
+    print("=== x1 ===")
+    print(x1)
+
+    print("=== NOT x1 ===")
+    print(~x1)
+
+    print("=== x1 * x2 * c1 ===")
+    print(x1 * x2 * c2)
+
+    print("=== (x1 + x2) * c2 ===")
+    print((x1 + x2) * c2)
+
+    print("=== x1 - x2 ===")
+    print(x1 - x2)
+
+    add1 = ~x1 + (x2 * ~x3)
+    if (add1 * c1) == add1:
+        print('ADD.constant(1.0) is the neutral element for multiplication!')
+
+    add2 = ~(~x2) * (~(x1 + x3))
+    if (add2 + c0) == add2:
+        print('ADD.constant(0.0) is the neutral element for addition!')
+
+    add3 = x1 * ~x1
+    if add3 == c0:
+        print('You can check contradiction by comparing with ADD.constant(0.0) !')
+
+    add4 = x1 + ~x1
+    if add4 == c1:
+        print('You can check tautology by comparing with ADD.constant(1.0) !')
+
+    if (x1 * x2) == (x2 * x1) and (x1 + x2) == (x2 + x1):
+        print('Commutative law works for multiplication and addition!')
+
+    if x1 * (x2 * x3) == (x1 * x2) * x3 and x1 + (x2 + x3) == (x1 + x2) + x3:
+        print('Associative law works for multiplication and addition!')
+
+    if (x1 * (x2 + x3)) == ((x1 * x2) + (x1 * x3)):
+        print('Distributivity law works: multiplication distributes over addition!')
+
+    add5 = x1 * x2 + x3 * c2
+    valuation = { 1: True, 2: False, 3: True }
+
+    if add5.restrict(valuation).value == 2.0:
+        print('You can evaluate the function with restrict!')
+
+    valuation2 = { 1: True }
+    if add5.restrict(valuation2) == (x2 + x3 * c2):
+        print('You can also partially evaluate the function with restrict!')
+
 
 LICENSE
 -------

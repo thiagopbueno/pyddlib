@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>pyddlib.dd &#8212; pyddlib v0.1.0-alpha documentation</title>
+    <title>pyddlib.dd &#8212; pyddlib v0.2.0-alpha documentation</title>
     
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     'v0.1.0-alpha',
+        VERSION:     'v0.2.0-alpha',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">pyddlib v0.1.0-alpha documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">pyddlib v0.2.0-alpha documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>  
@@ -61,7 +61,9 @@
 <span class="c1"># GNU General Public License for more details.</span>
 
 <span class="c1"># You should have received a copy of the GNU General Public License</span>
-<span class="c1"># along with pydd. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="c1"># along with pyddlib. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="kn">from</span> <span class="nn">numbers</span> <span class="k">import</span> <span class="n">Number</span>
 
 <span class="kn">import</span> <span class="nn">sys</span>
 
@@ -70,9 +72,9 @@
 
 	<span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">		Initialize and return an iterator for pydd.DD objects.</span>
+<span class="sd">		Initialize and return an iterator for pyddlib.DD objects.</span>
 
-<span class="sd">		:rtype: pydd.DD</span>
+<span class="sd">		:rtype: pyddlib.DD</span>
 <span class="sd">		&quot;&quot;&quot;</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">__traversed</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">__fringe</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="p">]</span>
@@ -80,11 +82,11 @@
 
 	<span class="k">def</span> <span class="nf">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">		Implement a graph-based traversal algorithm for pydd.DD objects.</span>
+<span class="sd">		Implement a graph-based traversal algorithm for pyddlib.DD objects.</span>
 <span class="sd">		Each vertex is visited exactly once. Low child is visited before</span>
 <span class="sd">		high child. Return the next vertex in the sequence.</span>
 
-<span class="sd">		:rtype: pydd.DD</span>
+<span class="sd">		:rtype: pyddlib.DD</span>
 <span class="sd">		&quot;&quot;&quot;</span>
 		<span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__fringe</span><span class="p">:</span>
 			<span class="k">raise</span> <span class="ne">StopIteration</span><span class="p">()</span>
@@ -100,23 +102,20 @@
 				<span class="bp">self</span><span class="o">.</span><span class="n">__traversed</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">low</span><span class="p">))</span>
 		<span class="k">return</span> <span class="n">vertex</span>
 
-	<span class="nd">@classmethod</span>
-<div class="viewcode-block" id="DD.reduce"><a class="viewcode-back" href="../../pyddlib.html#pyddlib.dd.DD.reduce">[docs]</a>	<span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+<div class="viewcode-block" id="DD.reduce"><a class="viewcode-back" href="../../pyddlib.html#pyddlib.dd.DD.reduce">[docs]</a>	<span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">		Reduce in place a pydd.DD object rooted in `v` by</span>
+<span class="sd">		Reduce in place a pyddlib.DD object rooted in `self` by</span>
 <span class="sd">		removing duplicate nodes and redundant sub-trees.</span>
-<span class="sd">		Return the canonical representation of the pydd.DD object.</span>
+<span class="sd">		Return the canonical representation of the pyddlib.DD object.</span>
 
-<span class="sd">		:param v: root vertex</span>
-<span class="sd">		:type v: pydd.DD</span>
-<span class="sd">		:rtype: pydd.DD</span>
+<span class="sd">		:rtype: pyddlib.DD</span>
 <span class="sd">		&quot;&quot;&quot;</span>
-		<span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">():</span>
-			<span class="k">return</span> <span class="n">v</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">():</span>
+			<span class="k">return</span> <span class="bp">self</span>
 
 		<span class="n">vlist</span> <span class="o">=</span> <span class="p">{}</span>
 		<span class="n">subgraph</span> <span class="o">=</span> <span class="p">{}</span>
-		<span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">vertex</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
 			<span class="n">index</span> <span class="o">=</span> <span class="n">vertex</span><span class="o">.</span><span class="n">_index</span>
 			<span class="n">vlist</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">vlist</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="p">[])</span>
 			<span class="n">vlist</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
@@ -136,7 +135,13 @@
 
 			<span class="n">oldkey</span> <span class="o">=</span> <span class="kc">None</span>
 			<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-				<span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">oldkey</span><span class="p">:</span>
+				<span class="n">same</span> <span class="o">=</span> <span class="kc">False</span>
+				<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">Number</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">oldkey</span><span class="p">,</span> <span class="n">Number</span><span class="p">):</span>
+					<span class="n">same</span> <span class="o">=</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">key</span> <span class="o">-</span> <span class="n">oldkey</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">1e-6</span><span class="p">)</span>
+				<span class="k">else</span><span class="p">:</span>
+					<span class="n">same</span> <span class="o">=</span> <span class="p">(</span><span class="n">key</span> <span class="o">==</span> <span class="n">oldkey</span><span class="p">)</span>
+
+				<span class="k">if</span> <span class="n">same</span><span class="p">:</span>
 					<span class="n">u</span><span class="o">.</span><span class="n">_id</span> <span class="o">=</span> <span class="n">nextid</span>
 				<span class="k">else</span><span class="p">:</span>
 					<span class="n">nextid</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -147,42 +152,41 @@
 						<span class="n">u</span><span class="o">.</span><span class="n">_high</span> <span class="o">=</span> <span class="n">subgraph</span><span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">_high</span><span class="o">.</span><span class="n">_id</span><span class="p">]</span>
 					<span class="n">oldkey</span> <span class="o">=</span> <span class="n">key</span>
 
-		<span class="k">return</span> <span class="n">subgraph</span><span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">_id</span><span class="p">]</span></div>
+		<span class="k">return</span> <span class="n">subgraph</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_id</span><span class="p">]</span></div>
 
 	<span class="nd">@classmethod</span>
 <div class="viewcode-block" id="DD.apply"><a class="viewcode-back" href="../../pyddlib.html#pyddlib.dd.DD.apply">[docs]</a>	<span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">op</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Return a new canonical representation of the</span>
-<span class="sd">		pydd.DD object for the result of `v1` `op` `v2`.</span>
+<span class="sd">		pyddlib.DD object for the result of `v1` `op` `v2`.</span>
 
 <span class="sd">		:param v1: root vertex of left operand</span>
-<span class="sd">		:type v1: pydd.DD</span>
+<span class="sd">		:type v1: pyddlib.DD</span>
 <span class="sd">		:param v2: root vertex of right operand</span>
-<span class="sd">		:type v2: pydd.DD</span>
+<span class="sd">		:type v2: pyddlib.DD</span>
 <span class="sd">		:param op: a binary operator</span>
 <span class="sd">		:type op: callable object or function</span>
-<span class="sd">		:rtype: pydd.DD</span>
+<span class="sd">		:rtype: pyddlib.DD</span>
 <span class="sd">		&quot;&quot;&quot;</span>
 		<span class="n">T</span> <span class="o">=</span> <span class="p">{}</span>
-		<span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">__apply_step</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">T</span><span class="p">))</span></div>
+		<span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__apply_step</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">()</span></div>
 
 	<span class="nd">@classmethod</span>
 	<span class="k">def</span> <span class="nf">__apply_step</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">		Private auxiliary method used in pydd.DD.apply method.</span>
 <span class="sd">		Recursively computes `v1` `op` `v2`. If the result was</span>
 <span class="sd">		already computed as an intermediate result, it returns</span>
 <span class="sd">		the cached result stored in `T`.</span>
 
 <span class="sd">		:param v1: root vertex of left operand</span>
-<span class="sd">		:type v1: pydd.DD</span>
+<span class="sd">		:type v1: pyddlib.DD</span>
 <span class="sd">		:param v2: root vertex of right operand</span>
-<span class="sd">		:type v2: pydd.DD</span>
+<span class="sd">		:type v2: pyddlib.DD</span>
 <span class="sd">		:param op: a binary operator</span>
 <span class="sd">		:type op: callable object or function</span>
 <span class="sd">		:param T: cached intermediate results</span>
-<span class="sd">		:type T: dict( (int,int), pydd.DD )</span>
-<span class="sd">		:rtype: pydd.DD</span>
+<span class="sd">		:type T: dict( (int,int), pyddlib.DD )</span>
+<span class="sd">		:rtype: pyddlib.DD</span>
 <span class="sd">		&quot;&quot;&quot;</span>
 		<span class="n">u</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">get</span><span class="p">((</span><span class="n">v1</span><span class="o">.</span><span class="n">_id</span><span class="p">,</span> <span class="n">v2</span><span class="o">.</span><span class="n">_id</span><span class="p">))</span>
 		<span class="k">if</span> <span class="n">u</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -217,25 +221,39 @@
 		<span class="n">T</span><span class="p">[(</span><span class="n">v1</span><span class="o">.</span><span class="n">_id</span><span class="p">,</span> <span class="n">v2</span><span class="o">.</span><span class="n">_id</span><span class="p">)]</span> <span class="o">=</span> <span class="n">result</span>
 		<span class="k">return</span> <span class="n">result</span>
 
-	<span class="nd">@classmethod</span>
-<div class="viewcode-block" id="DD.restrict"><a class="viewcode-back" href="../../pyddlib.html#pyddlib.dd.DD.restrict">[docs]</a>	<span class="k">def</span> <span class="nf">restrict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">valuation</span><span class="p">):</span>
-		<span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">__restrict_step</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">valuation</span><span class="p">))</span></div>
+<div class="viewcode-block" id="DD.restrict"><a class="viewcode-back" href="../../pyddlib.html#pyddlib.dd.DD.restrict">[docs]</a>	<span class="k">def</span> <span class="nf">restrict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valuation</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Return a new reduced ADD with variables in `valuation`.keys()</span>
+<span class="sd">		restricted to `valuation`.values().</span>
 
-	<span class="nd">@classmethod</span>
-	<span class="k">def</span> <span class="nf">__restrict_step</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">valuation</span><span class="p">):</span>
-		<span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">():</span>
-			<span class="k">return</span> <span class="n">v</span>
+<span class="sd">		:param valuation: mapping from variable index to boolean value</span>
+<span class="sd">		:type valuation: dict(int,bool)</span>
+<span class="sd">		:rtype: pyddlib.ADD</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__restrict_step</span><span class="p">(</span><span class="n">valuation</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">()</span></div>
 
-		<span class="n">val</span> <span class="o">=</span> <span class="n">valuation</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">_index</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+	<span class="k">def</span> <span class="nf">__restrict_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valuation</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Return a new ADD with variables in `valuation`.keys()</span>
+<span class="sd">		restricted to `valuation`.values().</span>
+
+<span class="sd">		:param valuation: mapping from variable index to boolean value</span>
+<span class="sd">		:type valuation: dict(int,bool)</span>
+<span class="sd">		:rtype: pyddlib.ADD</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">():</span>
+			<span class="k">return</span> <span class="bp">self</span>
+
+		<span class="n">val</span> <span class="o">=</span> <span class="n">valuation</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_index</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 		<span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-			<span class="n">low</span>  <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__restrict_step</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">_low</span><span class="p">,</span>  <span class="n">valuation</span><span class="p">)</span>
-			<span class="n">high</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__restrict_step</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">_high</span><span class="p">,</span> <span class="n">valuation</span><span class="p">)</span>
-			<span class="k">return</span> <span class="n">v</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">_index</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+			<span class="n">low</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_low</span><span class="o">.</span><span class="n">__restrict_step</span><span class="p">(</span><span class="n">valuation</span><span class="p">)</span>
+			<span class="n">high</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_high</span><span class="o">.</span><span class="n">__restrict_step</span><span class="p">(</span><span class="n">valuation</span><span class="p">)</span>
+			<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_index</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 		<span class="k">else</span><span class="p">:</span>
 			<span class="k">if</span> <span class="n">val</span><span class="p">:</span>
-				<span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__restrict_step</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">_high</span><span class="p">,</span> <span class="n">valuation</span><span class="p">)</span>
+				<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_high</span><span class="o">.</span><span class="n">__restrict_step</span><span class="p">(</span><span class="n">valuation</span><span class="p">)</span>
 			<span class="k">else</span><span class="p">:</span>
-				<span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__restrict_step</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">_low</span><span class="p">,</span> <span class="n">valuation</span><span class="p">)</span></div>
+				<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_low</span><span class="o">.</span><span class="n">__restrict_step</span><span class="p">(</span><span class="n">valuation</span><span class="p">)</span></div>
 </pre></div>
 
           </div>
@@ -266,7 +284,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">pyddlib v0.1.0-alpha documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">pyddlib v0.2.0-alpha documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
