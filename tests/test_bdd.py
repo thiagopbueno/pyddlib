@@ -98,85 +98,85 @@ class TestBDD(unittest.TestCase):
 		x1, x2, x3 = self.x1, self.x2, self.x3
 
 		valuation = { 1: True, 2: False, 3: True }
-		self.assertEqual(BDD.restrict(one, valuation),  one)
-		self.assertEqual(BDD.restrict(zero, valuation), zero)
+		self.assertEqual(one.restrict(valuation),  one)
+		self.assertEqual(zero.restrict(valuation), zero)
 
 		vars = [ x1, x2, x3 ]
 		for i, var in enumerate(vars):
 			if valuation[i+1]:
-				self.assertEqual(BDD.restrict(var, valuation), one)
+				self.assertEqual(var.restrict(valuation), one)
 			else:
-				self.assertEqual(BDD.restrict(var, valuation), zero)
+				self.assertEqual(var.restrict(valuation), zero)
 
-		f1 = x1 & (-x2)
+		f1 = x1 & (~x2)
 		val1 = [ (1, False), (2, False) ]
-		self.assertEqual(BDD.restrict(f1, dict(val1[:1])), zero)
-		self.assertEqual(BDD.restrict(f1, dict(val1[1:])), x1)
-		self.assertEqual(BDD.restrict(f1, dict(val1)), zero)
+		self.assertEqual(f1.restrict(dict(val1[:1])), zero)
+		self.assertEqual(f1.restrict(dict(val1[1:])), x1)
+		self.assertEqual(f1.restrict(dict(val1)), zero)
 		val2 = [ (1, False), (2, True)  ]
-		self.assertEqual(BDD.restrict(f1, dict(val2[:1])), zero)
-		self.assertEqual(BDD.restrict(f1, dict(val2[1:])), zero)
-		self.assertEqual(BDD.restrict(f1, dict(val2)), zero)
+		self.assertEqual(f1.restrict(dict(val2[:1])), zero)
+		self.assertEqual(f1.restrict(dict(val2[1:])), zero)
+		self.assertEqual(f1.restrict(dict(val2)), zero)
 		val3 = [ (1, True),  (2, False) ]
-		self.assertEqual(BDD.restrict(f1, dict(val3[:1])), -x2)
-		self.assertEqual(BDD.restrict(f1, dict(val3[1:])), x1)
-		self.assertEqual(BDD.restrict(f1, dict(val3)), one)
+		self.assertEqual(f1.restrict(dict(val3[:1])), ~x2)
+		self.assertEqual(f1.restrict(dict(val3[1:])), x1)
+		self.assertEqual(f1.restrict(dict(val3)), one)
 		val4 = [ (1, True),  (2, True)  ]
-		self.assertEqual(BDD.restrict(f1, dict(val4[:1])), -x2)
-		self.assertEqual(BDD.restrict(f1, dict(val4[1:])), zero)
-		self.assertEqual(BDD.restrict(f1, dict(val4)), zero)
+		self.assertEqual(f1.restrict(dict(val4[:1])), ~x2)
+		self.assertEqual(f1.restrict(dict(val4[1:])), zero)
+		self.assertEqual(f1.restrict(dict(val4)), zero)
 
-		f2 = x2 & (-x3)
+		f2 = x2 & (~x3)
 		val0 = [ (1, False), (4, False) ]
-		self.assertEqual(BDD.restrict(f2, dict(val0)), f2)
+		self.assertEqual(f2.restrict(dict(val0)), f2)
 		val0 = [ (1, False), (4, True) ]
-		self.assertEqual(BDD.restrict(f2, dict(val0)), f2)
+		self.assertEqual(f2.restrict(dict(val0)), f2)
 		val0 = [ (1, True), (4, False) ]
-		self.assertEqual(BDD.restrict(f2, dict(val0)), f2)
+		self.assertEqual(f2.restrict(dict(val0)), f2)
 		val0 = [ (1, True), (4, True) ]
-		self.assertEqual(BDD.restrict(f2, dict(val0)), f2)
+		self.assertEqual(f2.restrict(dict(val0)), f2)
 
-		f3 = -x2 | x3
+		f3 = ~x2 | x3
 		val1 = [ (1, False), (2, False), (3, False), (4, False) ]
-		self.assertEqual(BDD.restrict(f3, dict(val1)), one)
+		self.assertEqual(f3.restrict(dict(val1)), one)
 		val2 = [ (1, True), (2, False), (3, False), (4, False) ]
-		self.assertEqual(BDD.restrict(f3, dict(val2)), one)
+		self.assertEqual(f3.restrict(dict(val2)), one)
 		val3 = [ (1, False), (2, True), (3, False), (4, False) ]
-		self.assertEqual(BDD.restrict(f3, dict(val3)), zero)
+		self.assertEqual(f3.restrict(dict(val3)), zero)
 		val4 = [ (1, True), (2, True), (3, False), (4, False) ]
-		self.assertEqual(BDD.restrict(f3, dict(val4)), zero)
+		self.assertEqual(f3.restrict(dict(val4)), zero)
 		val5 = [ (1, False), (2, False), (3, True), (4, False) ]
-		self.assertEqual(BDD.restrict(f3, dict(val5)), one)
+		self.assertEqual(f3.restrict(dict(val5)), one)
 		val6 = [ (1, True), (2, False), (3, True), (4, False) ]
-		self.assertEqual(BDD.restrict(f3, dict(val6)), one)
+		self.assertEqual(f3.restrict(dict(val6)), one)
 		val7 = [ (1, False), (2, True), (3, True), (4, False) ]
-		self.assertEqual(BDD.restrict(f3, dict(val7)), one)
+		self.assertEqual(f3.restrict(dict(val7)), one)
 		val8 = [ (1, True), (2, True), (3, True), (4, False) ]
-		self.assertEqual(BDD.restrict(f3, dict(val8)), one)
+		self.assertEqual(f3.restrict(dict(val8)), one)
 		val9 = [ (1, False), (2, False), (3, False), (4, True) ]
-		self.assertEqual(BDD.restrict(f3, dict(val9)), one)
+		self.assertEqual(f3.restrict(dict(val9)), one)
 		val10 = [ (1, True), (2, False), (3, False), (4, True) ]
-		self.assertEqual(BDD.restrict(f3, dict(val10)), one)
+		self.assertEqual(f3.restrict(dict(val10)), one)
 		val11 = [ (1, False), (2, True), (3, False), (4, True) ]
-		self.assertEqual(BDD.restrict(f3, dict(val11)), zero)
+		self.assertEqual(f3.restrict(dict(val11)), zero)
 		val12 = [ (1, True), (2, True), (3, False), (4, True) ]
-		self.assertEqual(BDD.restrict(f3, dict(val12)), zero)
+		self.assertEqual(f3.restrict(dict(val12)), zero)
 		val13 = [ (1, False), (2, False), (3, True), (4, True) ]
-		self.assertEqual(BDD.restrict(f3, dict(val13)), one)
+		self.assertEqual(f3.restrict(dict(val13)), one)
 		val14 = [ (1, True), (2, False), (3, True), (4, True) ]
-		self.assertEqual(BDD.restrict(f3, dict(val14)), one)
+		self.assertEqual(f3.restrict(dict(val14)), one)
 		val15 = [ (1, False), (2, True), (3, True), (4, True) ]
-		self.assertEqual(BDD.restrict(f3, dict(val15)), one)
+		self.assertEqual(f3.restrict(dict(val15)), one)
 		val16 = [ (1, True), (2, True), (3, True), (4, True) ]
-		self.assertEqual(BDD.restrict(f3, dict(val16)), one)
+		self.assertEqual(f3.restrict(dict(val16)), one)
 
 	def test_not(self):
-		one = -self.zero
+		one = ~self.zero
 		one.is_one()
-		zero = -self.one
+		zero = ~self.one
 		zero.is_zero()
 
-		vars = [ -self.x1, -self.x2, -self.x3 ]
+		vars = [ ~self.x1, ~self.x2, ~self.x3 ]
 		for index, var in enumerate(vars):
 			self.assertFalse(var.is_terminal())
 			self.assertEqual(var._index, index+1)
@@ -189,7 +189,7 @@ class TestBDD(unittest.TestCase):
 		dd3 = BDD(3, dd1, dd2, None)
 		dd4 = BDD(2, dd1, dd3, None)
 		dd5 = BDD(1, dd4, dd3, None)
-		negdd5 = -dd5
+		negdd5 = ~dd5
 		expected = [ 1, 2, True, 3, False ]
 		for dd, val in zip(negdd5, expected):
 			if dd.is_terminal():
@@ -220,36 +220,36 @@ class TestBDD(unittest.TestCase):
 		self.assertEqual(zero & one, one & zero)
 		self.assertEqual(x1 & x2, x2 & x1)
 		self.assertEqual((x1 & x2) & x3, x3 & (x1 & x2))
-		self.assertEqual(dd5 & (x2 & -x3), (x2 & -x3) & dd5)
+		self.assertEqual(dd5 & (x2 & ~x3), (x2 & ~x3) & dd5)
 
 		# associative law
 		self.assertEqual(x1 & (x2 & x3), (x1 & x2) & x3)
-		self.assertEqual(-x1 & (x2 & x3), (-x1 & x2) & x3)
-		self.assertEqual(x1 & (-x2 & x3), (x1 & -x2) & x3)
-		self.assertEqual(x1 & (x2 & -x3), (x1 & x2) & -x3)
+		self.assertEqual(~x1 & (x2 & x3), (~x1 & x2) & x3)
+		self.assertEqual(x1 & (~x2 & x3), (x1 & ~x2) & x3)
+		self.assertEqual(x1 & (x2 & ~x3), (x1 & x2) & ~x3)
 
 		# neutral element
 		self.assertEqual(x1, x1 & one)
 		self.assertEqual(x2, x2 & one)
 		self.assertEqual(x3, x3 & one)
-		self.assertEqual(-x1, -x1 & one)
-		self.assertEqual(-x2, -x2 & one)
-		self.assertEqual(-x3, -x3 & one)
+		self.assertEqual(~x1, ~x1 & one)
+		self.assertEqual(~x2, ~x2 & one)
+		self.assertEqual(~x3, ~x3 & one)
 		self.assertEqual(x1 & x2 & x3, (x1 & x2 & x3) & one)
-		self.assertEqual(-x1 & -x2 & -x3, (-x1 & -x2 & -x3) & one)
+		self.assertEqual(~x1 & ~x2 & ~x3, (~x1 & ~x2 & ~x3) & one)
 		self.assertEqual(dd5, dd5 & one)
 
 		# opposite element
-		self.assertEqual(zero, x1 & -x1)
-		self.assertEqual(zero, -x2 & x2)
-		self.assertEqual(zero, -x3 & x3)
-		self.assertEqual(zero, dd5 & -dd5)
-		self.assertEqual(zero, -(x1 & -x3 & x2) & (x1 & -x3 & x2))
-		self.assertEqual(zero, -x1 & --x1)
-		self.assertEqual(zero, -(-x2) & -x2)
-		self.assertEqual(zero, -(-x3) & -x3)
-		self.assertEqual(zero, -dd5 & --dd5)
-		self.assertEqual(zero, --(x1 & -x3 & x2) & -(x1 & -x3 & x2))
+		self.assertEqual(zero, x1 & ~x1)
+		self.assertEqual(zero, ~x2 & x2)
+		self.assertEqual(zero, ~x3 & x3)
+		self.assertEqual(zero, dd5 & ~dd5)
+		self.assertEqual(zero, ~(x1 & ~x3 & x2) & (x1 & ~x3 & x2))
+		self.assertEqual(zero, ~x1 & ~~x1)
+		self.assertEqual(zero, ~(~x2) & ~x2)
+		self.assertEqual(zero, ~(~x3) & ~x3)
+		self.assertEqual(zero, ~dd5 & ~~dd5)
+		self.assertEqual(zero, ~~(x1 & ~x3 & x2) & ~(x1 & ~x3 & x2))
 
 		# distributivity law AND over OR
 		self.assertEqual(x1 & (x2 | x3), (x1 & x2) | (x1 & x3))
@@ -280,36 +280,36 @@ class TestBDD(unittest.TestCase):
 		self.assertEqual(zero | one, one | zero)
 		self.assertEqual(x1 | x2, x2 | x1)
 		self.assertEqual((x1 | x2) | x3, x3 | (x1 | x2))
-		self.assertEqual(dd5 | (x2 | -x3), (x2 | -x3) | dd5)
+		self.assertEqual(dd5 | (x2 | ~x3), (x2 | ~x3) | dd5)
 
 		# associative law
 		self.assertEqual(x1 | (x2 | x3), (x1 | x2) | x3)
-		self.assertEqual(-x1 | (x2 | x3), (-x1 | x2) | x3)
-		self.assertEqual(x1 | (-x2 | x3), (x1 | -x2) | x3)
-		self.assertEqual(x1 | (x2 | -x3), (x1 | x2) | -x3)
+		self.assertEqual(~x1 | (x2 | x3), (~x1 | x2) | x3)
+		self.assertEqual(x1 | (~x2 | x3), (x1 | ~x2) | x3)
+		self.assertEqual(x1 | (x2 | ~x3), (x1 | x2) | ~x3)
 
 		# neutral element
 		self.assertEqual(x1, x1 | zero)
 		self.assertEqual(x2, x2 | zero)
 		self.assertEqual(x3, x3 | zero)
-		self.assertEqual(-x1, -x1 | zero)
-		self.assertEqual(-x2, -x2 | zero)
-		self.assertEqual(-x3, -x3 | zero)
+		self.assertEqual(~x1, ~x1 | zero)
+		self.assertEqual(~x2, ~x2 | zero)
+		self.assertEqual(~x3, ~x3 | zero)
 		self.assertEqual(x1 | x2 | x3, (x1 | x2 | x3) | zero)
-		self.assertEqual(-x1 | -x2 | -x3, (-x1 | -x2 | -x3) | zero)
+		self.assertEqual(~x1 | ~x2 | ~x3, (~x1 | ~x2 | ~x3) | zero)
 		self.assertEqual(dd5, dd5 | zero)
 
 		# opposite element
-		self.assertEqual(one, x1 | -x1)
-		self.assertEqual(one, -x2 | x2)
-		self.assertEqual(one, -x3 | x3)
-		self.assertEqual(one, dd5 | -dd5)
-		self.assertEqual(one, -(x1 | -x3 | x2) | (x1 | -x3 | x2))
-		self.assertEqual(one, -x1 | --x1)
-		self.assertEqual(one, -(-x2) | -x2)
-		self.assertEqual(one, -(-x3) | -x3)
-		self.assertEqual(one, -dd5 | --dd5)
-		self.assertEqual(one, --(x1 | -x3 | x2) | -(x1 | -x3 | x2))
+		self.assertEqual(one, x1 | ~x1)
+		self.assertEqual(one, ~x2 | x2)
+		self.assertEqual(one, ~x3 | x3)
+		self.assertEqual(one, dd5 | ~dd5)
+		self.assertEqual(one, ~(x1 | ~x3 | x2) | (x1 | ~x3 | x2))
+		self.assertEqual(one, ~x1 | ~~x1)
+		self.assertEqual(one, ~(~x2) | ~x2)
+		self.assertEqual(one, ~(~x3) | ~x3)
+		self.assertEqual(one, ~dd5 | ~~dd5)
+		self.assertEqual(one, ~~(x1 | ~x3 | x2) | ~(x1 | ~x3 | x2))
 
 		# distributivity law OR over AND
 		self.assertEqual(x1 | (x2 & x3), (x1 | x2) & (x1 | x3))
@@ -340,36 +340,36 @@ class TestBDD(unittest.TestCase):
 		self.assertEqual(zero ^ one, one ^ zero)
 		self.assertEqual(x1 ^ x2, x2 ^ x1)
 		self.assertEqual((x1 ^ x2) ^ x3, x3 ^ (x1 ^ x2))
-		self.assertEqual(dd5 ^ (x2 ^ -x3), (x2 ^ -x3) ^ dd5)
+		self.assertEqual(dd5 ^ (x2 ^ ~x3), (x2 ^ ~x3) ^ dd5)
 
 		# associative law
 		self.assertEqual(x1 ^ (x2 ^ x3), (x1 ^ x2) ^ x3)
-		self.assertEqual(-x1 ^ (x2 ^ x3), (-x1 ^ x2) ^ x3)
-		self.assertEqual(x1 ^ (-x2 ^ x3), (x1 ^ -x2) ^ x3)
-		self.assertEqual(x1 ^ (x2 ^ -x3), (x1 ^ x2) ^ -x3)
+		self.assertEqual(~x1 ^ (x2 ^ x3), (~x1 ^ x2) ^ x3)
+		self.assertEqual(x1 ^ (~x2 ^ x3), (x1 ^ ~x2) ^ x3)
+		self.assertEqual(x1 ^ (x2 ^ ~x3), (x1 ^ x2) ^ ~x3)
 
 		# neutral element
 		self.assertEqual(x1, x1 ^ zero)
 		self.assertEqual(x2, x2 ^ zero)
 		self.assertEqual(x3, x3 ^ zero)
-		self.assertEqual(-x1, -x1 ^ zero)
-		self.assertEqual(-x2, -x2 ^ zero)
-		self.assertEqual(-x3, -x3 ^ zero)
+		self.assertEqual(~x1, ~x1 ^ zero)
+		self.assertEqual(~x2, ~x2 ^ zero)
+		self.assertEqual(~x3, ~x3 ^ zero)
 		self.assertEqual(x1 ^ x2 ^ x3, (x1 ^ x2 ^ x3) ^ zero)
-		self.assertEqual(-x1 ^ -x2 ^ -x3, (-x1 ^ -x2 ^ -x3) ^ zero)
+		self.assertEqual(~x1 ^ ~x2 ^ ~x3, (~x1 ^ ~x2 ^ ~x3) ^ zero)
 		self.assertEqual(dd5, dd5 ^ zero)
 
 		# opposite element
-		self.assertEqual(one, x1 ^ -x1)
-		self.assertEqual(one, -x2 ^ x2)
-		self.assertEqual(one, -x3 ^ x3)
-		self.assertEqual(one, dd5 ^ -dd5)
-		self.assertEqual(one, -(x1 ^ -x3 ^ x2) ^ (x1 ^ -x3 ^ x2))
-		self.assertEqual(one, -x1 ^ --x1)
-		self.assertEqual(one, -(-x2) ^ -x2)
-		self.assertEqual(one, -(-x3) ^ -x3)
-		self.assertEqual(one, -dd5 ^ --dd5)
-		self.assertEqual(one, --(x1 ^ -x3 ^ x2) ^ -(x1 ^ -x3 ^ x2))
+		self.assertEqual(one, x1 ^ ~x1)
+		self.assertEqual(one, ~x2 ^ x2)
+		self.assertEqual(one, ~x3 ^ x3)
+		self.assertEqual(one, dd5 ^ ~dd5)
+		self.assertEqual(one, ~(x1 ^ ~x3 ^ x2) ^ (x1 ^ ~x3 ^ x2))
+		self.assertEqual(one, ~x1 ^ ~~x1)
+		self.assertEqual(one, ~(~x2) ^ ~x2)
+		self.assertEqual(one, ~(~x3) ^ ~x3)
+		self.assertEqual(one, ~dd5 ^ ~~dd5)
+		self.assertEqual(one, ~~(x1 ^ ~x3 ^ x2) ^ ~(x1 ^ ~x3 ^ x2))
 
 
 if __name__ == '__main__':
