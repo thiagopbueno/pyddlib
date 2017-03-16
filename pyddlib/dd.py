@@ -11,7 +11,9 @@
 # GNU General Public License for more details.
 
 # You should have received a copy of the GNU General Public License
-# along with pydd. If not, see <http://www.gnu.org/licenses/>.
+# along with pyddlib. If not, see <http://www.gnu.org/licenses/>.
+
+from numbers import Number
 
 import sys
 
@@ -20,9 +22,9 @@ class DD(object):
 
 	def __iter__(self):
 		"""
-		Initialize and return an iterator for pydd.DD objects.
+		Initialize and return an iterator for pyddlib.DD objects.
 
-		:rtype: pydd.DD
+		:rtype: pyddlib.DD
 		"""
 		self.__traversed = set()
 		self.__fringe = [self]
@@ -30,11 +32,11 @@ class DD(object):
 
 	def __next__(self):
 		"""
-		Implement a graph-based traversal algorithm for pydd.DD objects.
+		Implement a graph-based traversal algorithm for pyddlib.DD objects.
 		Each vertex is visited exactly once. Low child is visited before
 		high child. Return the next vertex in the sequence.
 
-		:rtype: pydd.DD
+		:rtype: pyddlib.DD
 		"""
 		if not self.__fringe:
 			raise StopIteration()
@@ -109,15 +111,15 @@ class DD(object):
 	def apply(cls, v1, v2, op):
 		"""
 		Return a new canonical representation of the
-		pydd.DD object for the result of `v1` `op` `v2`.
+		pyddlib.DD object for the result of `v1` `op` `v2`.
 
 		:param v1: root vertex of left operand
-		:type v1: pydd.DD
+		:type v1: pyddlib.DD
 		:param v2: root vertex of right operand
-		:type v2: pydd.DD
+		:type v2: pyddlib.DD
 		:param op: a binary operator
 		:type op: callable object or function
-		:rtype: pydd.DD
+		:rtype: pyddlib.DD
 		"""
 		T = {}
 		return cls.reduce(cls.__apply_step(v1, v2, op, T))
@@ -125,20 +127,20 @@ class DD(object):
 	@classmethod
 	def __apply_step(cls, v1, v2, op, T):
 		"""
-		Private auxiliary method used in pydd.DD.apply method.
+		Private auxiliary method used in pyddlib.DD.apply method.
 		Recursively computes `v1` `op` `v2`. If the result was
 		already computed as an intermediate result, it returns
 		the cached result stored in `T`.
 
 		:param v1: root vertex of left operand
-		:type v1: pydd.DD
+		:type v1: pyddlib.DD
 		:param v2: root vertex of right operand
-		:type v2: pydd.DD
+		:type v2: pyddlib.DD
 		:param op: a binary operator
 		:type op: callable object or function
 		:param T: cached intermediate results
-		:type T: dict( (int,int), pydd.DD )
-		:rtype: pydd.DD
+		:type T: dict( (int,int), pyddlib.DD )
+		:rtype: pyddlib.DD
 		"""
 		u = T.get((v1._id, v2._id))
 		if u is not None:

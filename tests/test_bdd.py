@@ -19,7 +19,8 @@ import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../pyddlib/'))
 
-from pyddlib.bdd import BDD
+# from pyddlib.bdd import BDD
+from bdd import BDD
 
 import unittest
 
