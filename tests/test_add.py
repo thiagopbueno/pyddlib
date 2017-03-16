@@ -17,11 +17,11 @@
 
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../pyddlib/'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../pyddlib/'))
 
 import unittest
 
-from add import ADD
+from pyddlib.add import ADD
 
 class TestADD(unittest.TestCase):
 

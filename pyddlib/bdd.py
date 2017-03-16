@@ -11,7 +11,7 @@
 # GNU General Public License for more details.
 
 # You should have received a copy of the GNU General Public License
-# along with pydd. If not, see <http://www.gnu.org/licenses/>.
+# along with pyddlib. If not, see <http://www.gnu.org/licenses/>.
 
 from pyddlib.dd import DD
 
@@ -22,9 +22,9 @@ class BDD(DD):
 	:param index: root vertex variable index (-1 if terminal vertex)
 	:type  index: int
 	:param low:   low child vertex of BDD (None if terminal vertex)
-	:type  low:   pydd.BDD
+	:type  low:   pyddlib.BDD
 	:param high:  high child vertex of BDD (None if terminal vertex)
-	:type  high:  pydd.BDD
+	:type  high:  pyddlib.BDD
 	:param value: terminal boolean value (None if non-terminal vertex)
 	:type  type:  bool or None
 	"""
@@ -44,7 +44,7 @@ class BDD(DD):
 
 	def __repr__(self):
 		"""
-		Return tree-like representation of pydd.BDD object.
+		Return tree-like representation of pyddlib.BDD object.
 
 		:rytpe: str
 		"""
@@ -105,25 +105,25 @@ class BDD(DD):
 		return  (self._low  and self._low.is_zero()) and \
 				(self._high and self._high.is_one())
 
-	def __neg__(self):
+	def __invert__(self):
 		"""
 		Return a new BDD representing the negation of the boolean function.
 
-		:rtype: pydd.BDD
+		:rtype: pyddlib.BDD
 		"""
 		if self.is_one():
 			return self.zero()
 		if self.is_zero():
 			return self.one()
-		return BDD(self._index, -self._low, -self._high, None)
+		return BDD(self._index, ~self._low, ~self._high, None)
 
 	def __and__(self, other):
 		"""
 		Return a new BDD representing the conjunction of boolean functions.
 
 		:param other: BDD
-		:type other: pydd.BDD
-		:rtype: pydd.BDD
+		:type other: pyddlib.BDD
+		:rtype: pyddlib.BDD
 		"""
 		return BDD.apply(self, other, bool.__and__)
 
@@ -132,8 +132,8 @@ class BDD(DD):
 		Return a new BDD representing the disjunction of boolean functions.
 
 		:param other: BDD
-		:type other: pydd.BDD
-		:rtype: pydd.BDD
+		:type other: pyddlib.BDD
+		:rtype: pyddlib.BDD
 		"""
 		return BDD.apply(self, other, bool.__or__)
 
@@ -142,8 +142,8 @@ class BDD(DD):
 		Return a new BDD representing the XOR of boolean functions.
 
 		:param other: BDD
-		:type other: pydd.BDD
-		:rtype: pydd.BDD
+		:type other: pyddlib.BDD
+		:rtype: pyddlib.BDD
 		"""
 		return BDD.apply(self, other, bool.__xor__)
 
@@ -152,7 +152,7 @@ class BDD(DD):
 		Return True if both BDDs represent the same boolean function.
 
 		:param other: BDD
-		:type other: pydd.BDD
+		:type other: pyddlib.BDD
 		:rtype: bool
 		"""
 		return BDD.apply(self, other, bool.__eq__).is_one()
@@ -162,7 +162,7 @@ class BDD(DD):
 		Return True if both BDDs do not represent the same boolean function.
 
 		:param other: BDD
-		:type other: pydd.BDD
+		:type other: pyddlib.BDD
 		:rtype: bool
 		"""
 		return not self == other
@@ -174,7 +174,7 @@ class BDD(DD):
 
 		:param value: True or False
 		:type value: bool
-		:rtype: pydd.BDD
+		:rtype: pyddlib.BDD
 		"""
 		assert(type(value) == bool)
 		return BDD(-1, None, None, value)
@@ -184,7 +184,7 @@ class BDD(DD):
 		"""
 		Return the BDD representing the constant function True.
 
-		:rtype: pydd.BDD
+		:rtype: pyddlib.BDD
 		"""
 		if BDD.__one:
 			return BDD.__one
@@ -196,7 +196,7 @@ class BDD(DD):
 		"""
 		Return the BDD representing the constant function False.
 
-		:rtype: pydd.BDD
+		:rtype: pyddlib.BDD
 		"""
 		if BDD.__zero:
 			return BDD.__zero
@@ -211,6 +211,6 @@ class BDD(DD):
 
 		:param index: variable index
 		:type index: int
-		:rtype: pydd.BDD
+		:rtype: pyddlib.BDD
 		"""
 		return BDD(index, cls.zero(), cls.one(), None)

@@ -15,7 +15,7 @@
 
 from numbers import Number
 
-from dd import DD
+from pyddlib.dd import DD
 
 class ADD(DD):
 	"""
